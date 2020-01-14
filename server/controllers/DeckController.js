@@ -93,7 +93,7 @@ export default class DecksController {
 
   async removeCard(req, res, next) {
     try {
-      let data = await _deckService.removeCard(req.params.id, req.session.uid, req.body)
+      let data = await _deckService.removeCard({ _id: req.body.deckId, userId: req.session.uid, cardId: req.body._id })
       return res.send(data)
     } catch (error) { next(error) }
   }
