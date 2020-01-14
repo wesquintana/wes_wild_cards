@@ -8,11 +8,16 @@ export default class DecksController {
   constructor() {
     this.router = express.Router()
       .use(Authorize.authenticated)
-      .get('', this.getAll)
-      .get('/:id', this.getById)
-      .post('', this.create)
-      .put('/:id', this.edit)
-      .delete('/:id', this.delete)
+      .get('', this.getAllPublic)
+      .get('/private/:id', this.getAllByUserId)
+      .get('/:id/cards', this.getCards)
+      .get('/:id', this.getDeckById)
+      .post('', this.createDeck)
+      .post('/:id/cards', this.createCard)
+      .put('/:id', this.editDeck)
+      .put('/:id/cards', this.removeCard)
+      .put('/:id/cards/:id', this.editCard)
+      .delete('/:id', this.removeDeck)
       .use(this.defaultRoute)
   }
 
@@ -22,40 +27,80 @@ export default class DecksController {
     next({ status: 404, message: 'No Such Route' })
   }
 
-  async getAll(req, res, next) {
+  async getAllPublic(req, res, next) {
     try {
       //only gets decks by user who is logged in
-      let data = await _deckService.getAll(req.session.uid)
+      let data = await _deckService.getAllPublic()
       return res.send(data)
     }
     catch (err) { next(err) }
   }
 
-  async getById(req, res, next) {
+  async getAllByUserId(req, res, next) {
     try {
-      let data = await _deckService.getById(req.params.id, req.session.uid)
+      //only gets decks by user who is logged in
+      let data = await _deckService.getAllByUserId(req.session.uid)
+      return res.send(data)
+    }
+    catch (err) { next(err) }
+  }
+
+  async getDeckById(req, res, next) {
+    try {
+      let data = await _deckService.getDeckById(req.params.id, req.session.uid)
       return res.send(data)
     } catch (error) { next(error) }
   }
 
-  async create(req, res, next) {
+
+  async createDeck(req, res, next) {
     try {
       req.body.authorId = req.session.uid
-      let data = await _deckService.create(req.body)
+      let data = await _deckService.createDeck(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 
-  async edit(req, res, next) {
+  async createCard(req, res, next) {
     try {
-      let data = await _deckService.edit(req.params.id, req.session.uid, req.body)
+      req.body.authorId = req.session.uid
+      let data = await _deckService.createCard(req.params.id, req.body)
+      return res.status(201).send(data)
+    } catch (error) { next(error) }
+  }
+
+  async getCards(req, res, next) {
+    try {
+      let data = await _deckService.getCards(req.params.id)
+      return res.status(201).send(data)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async editDeck(req, res, next) {
+    try {
+      let data = await _deckService.editDeck(req.params.id, req.session.uid, req.body)
       return res.send(data)
     } catch (error) { next(error) }
   }
 
-  async delete(req, res, next) {
+  async editCard(req, res, next) {
     try {
-      await _deckService.delete(req.params.id, req.session.uid)
+      let data = await _deckService.editCard(req.params.id, req.session.uid, req.body)
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async removeCard(req, res, next) {
+    try {
+      let data = await _deckService.removeCard(req.params.id, req.session.uid, req.body)
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+
+  async removeDeck(req, res, next) {
+    try {
+      await _deckService.removeDeck(req.params.id, req.session.uid)
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

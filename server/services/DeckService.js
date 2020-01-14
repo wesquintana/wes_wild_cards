@@ -9,20 +9,47 @@ class DeckService {
     return await _repository.find({})
   }
 
-  async getById(id, userId) {
-    let data = await _repository.findOne({ _id: id, authorId: userId })
+  async getAllByUserId(userId) {
+    let data = await _repository.find({ authorId: userId })
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400)
     }
     return data
   }
 
-  async create(rawData) {
+  async getDeckById(id, userId) {
+    let data = await _repository.findOne({ _id: id, authorId: userId })
+
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this deck", 400)
+    }
+    return data
+  }
+
+  async createDeck(rawData) {
     let data = await _repository.create(rawData)
     return data
   }
 
-  async edit(id, userId, update) {
+  async createCard(deckId, rawData) {
+    let data = await _repository.findOneAndUpdate(
+      { _id: deckId },
+      { $push: { cards: rawData } },
+      { new: true })
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this deck", 400)
+    }
+  }
+
+  async getCards(deckId) {
+    let data = await _repository.find({ deckId: deckId });
+    if (!data) {
+      throw new ApiError("Invalid Id", 400);
+    }
+    return data;
+  }
+
+  async editDeck(id, userId, update) {
     let data = await _repository.findOneAndUpdate({ _id: id, authorId: userId }, update, { new: true })
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
@@ -30,9 +57,10 @@ class DeckService {
     return data;
   }
 
+  async editCard(id, userId, update) { }
 
 
-  async delete(id, userId) {
+  async rmoveDeck(id, userId) {
     let data = await _repository.findOneAndRemove({ _id: id, authorId: userId });
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
