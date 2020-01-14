@@ -18,7 +18,8 @@ class DeckService {
   }
 
   async getDeckById(id, userId) {
-    let data = await _repository.findOne({ _id: id, authorId: userId })
+    let data = await _repository.findOne({ $and: [{ _id: id }, { $or: [{ authorId: userId }, { isPrivate: false }] }] })
+    // NOTE checks deck to find matching ID AND checks either if it belongs to the user OR deck is public
 
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400)
@@ -58,12 +59,22 @@ class DeckService {
   }
 
   async editCard(id, userId, update) { }
+  // TODO make editCard in DeckService
 
-
-  async rmoveDeck(id, userId) {
+  async removeDeck(id, userId) {
     let data = await _repository.findOneAndRemove({ _id: id, authorId: userId });
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
+    }
+  }
+
+  async removeCard(payload) {
+    let data = await _repository.findOneAndUpdate(
+      { _id: payload.deckId },
+      { $pull: { cards: { _id: payload.cardId } } },
+      { new: true });
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this comment", 400);
     }
   }
 
