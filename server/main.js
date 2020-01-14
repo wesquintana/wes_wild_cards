@@ -13,7 +13,7 @@ server.use(express.static(__dirname + "/../client/dist"));
 
 var whitelist = ["http://localhost:8080"];
 var corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
     callback(null, originIsWhitelisted);
   },
@@ -36,9 +36,9 @@ server.use(new Session().express);
 server.use("/account", new UserController().router);
 
 //YOUR ROUTES HERE!!!!!!
-import BoardController from "./controllers/BoardController";
+import DeckController from "./controllers/DeckController";
 import ProfileController from "./controllers/ProfileController";
-server.use("/api/boards", new BoardController().router);
+server.use("/api/decks", new DeckController().router);
 server.use("/api/profile", new ProfileController().router);
 
 //NOTE Default error handler, catches all routes with an error attached
