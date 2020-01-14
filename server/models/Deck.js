@@ -18,6 +18,7 @@ const Deck = new Schema({
   description: { type: String, required: true },
   rules: { type: String, required: true },
   authorId: { type: ObjectId, ref: 'User', required: true },
+  isPrivate: { type: Boolean, required: true },
   cards: [Card],
   img: { type: String, required: false }
 }, { timestamps: true })
