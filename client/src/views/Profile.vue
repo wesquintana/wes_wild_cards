@@ -2,14 +2,12 @@
   <div class="profile container">
     <div class="row">
       <div class="col-3 border border-primary">
-        <img :src="'https://robohash.org/'+profile.name+'.png'" />
-        <input
-          v-if="!editing"
-          type="text"
-          :placeholder="'https://robohash.org/'+profile.name+'.png'"
-        />
-        <button class="btn btn-primary" v-if="editing" @click="startEditing">Edit Profile</button>
-        <button v-else class="btn btn-success" @click="submitEdits">Done</button>
+        <img id="profile-image" :src="profile.imgURL" />
+        <input v-if="!editing" type="text" v-model="profile.imgURL" />
+        <div v-if="user._id==profile.userId">
+          <button class="btn btn-primary" v-if="editing" @click="startEditing">Edit Profile</button>
+          <button v-else class="btn btn-success" @click="submitEdits">Done</button>
+        </div>
       </div>
       <div class="col-9 border border-secondary">
         <h4 class="text-left">{{profile.name}}</h4>
@@ -38,15 +36,27 @@ export default {
       this.editing = !this.editing;
     },
     submitEdits() {
+      this.$store.dispatch("editProfile", {
+        id: this.profile._id,
+        description: this.profile.description,
+        imgURL: this.profile.imgURL
+      });
       this.editing = !this.editing;
     }
   },
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    user() {
+      return this.$store.state.user;
     }
   }
 };
 </script>
 <style>
+#profile-image {
+  max-width: 200px;
+  max-height: 300px;
+}
 </style>
