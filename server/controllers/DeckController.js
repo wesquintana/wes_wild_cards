@@ -50,7 +50,7 @@ export default class DecksController {
   async getPublicDecksByUserId(req, res, next) {
     try {
       //only gets decks by user who is logged in
-      let data = await _deckService.getPublicDecksByUserId(req.params.uid)
+      let data = await _deckService.getPublicDecksByUserId(req.params.id)
       return res.send(data)
     }
     catch (err) { next(err) }
