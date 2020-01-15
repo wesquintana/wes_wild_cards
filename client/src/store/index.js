@@ -4,7 +4,7 @@ import Axios from "axios";
 import router from "../router/index";
 import AuthService from "../AuthService";
 import profileModule from "./ProfileModule";
-import deckModule from "./DeckModule"
+import deckModule from "./DeckModule";
 
 Vue.use(Vuex);
 
@@ -38,6 +38,13 @@ export default new Vuex.Store({
     },
     setResource(state, payload) {
       state[payload.name] = payload.data;
+    },
+    resetState(state) {
+      state.user = {};
+      state.profile = {};
+      state.activeProfile = {};
+      state.userDecks = [];
+      state.activeDeck = {};
     }
   },
   actions: {
@@ -46,7 +53,6 @@ export default new Vuex.Store({
       try {
         let user = await AuthService.Register(creds);
         commit("setUser", user);
-        router.push({ name: "boards" });
       } catch (e) {
         console.warn(e.message);
       }
@@ -55,7 +61,7 @@ export default new Vuex.Store({
       try {
         let user = await AuthService.Login(creds);
         commit("setUser", user);
-        router.push({ name: "boards" });
+        router.go(0);
       } catch (e) {
         console.warn(e.message);
       }
@@ -66,7 +72,6 @@ export default new Vuex.Store({
         if (!success) {
         }
         commit("resetState");
-        router.push({ name: "login" });
       } catch (e) {
         console.warn(e.message);
       }
@@ -78,7 +83,7 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
-    },
+    }
     //#endregion
 
     //#region -- BOARDS --

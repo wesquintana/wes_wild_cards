@@ -44,6 +44,9 @@ export default {
       if (loginInfo) {
         this.$store.dispatch("login", loginInfo);
       }
+    },
+    async logout() {
+      this.$store.dispatch("logout");
     }
   },
 
