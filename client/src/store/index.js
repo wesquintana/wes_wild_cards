@@ -4,6 +4,7 @@ import Axios from "axios";
 import router from "../router/index";
 import AuthService from "../AuthService";
 import profileModule from "./ProfileModule";
+import deckModule from "./DeckModule"
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   modules: {
-    profileModule
+    profileModule,
+    deckModule
   },
   state: {
     user: {},

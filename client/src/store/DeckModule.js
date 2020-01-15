@@ -12,7 +12,7 @@ export default {
   actions: {
     async getPublicDecks({ commit, dispatch }, id) {
       try {
-        let res = await api.get("decks/" + id);
+        let res = await api.get("decks/");
         commit("setResource", { name: "publicDecks", data: res.data });
       } catch (error) {
         console.error(error);
@@ -20,7 +20,7 @@ export default {
     },
     async getUserDecks({ commit, dispatch }, id) {
       try {
-        let res = await api.get("decks/" + id);
+        let res = await api.get("decks/private/" + id);
         commit("setResource", { name: "userDecks", data: res.data });
       } catch (error) {
         console.error(error);
