@@ -25,6 +25,39 @@ export default class NotificationService {
       return false;
     }
   }
+  static async registerData(title = "Enter Inputs") {
+    try {
+      const { value: formValues } = await Swal.fire({
+        title,
+        html:
+          '<input id="swal-input1" class="swal2-input" type="text" v-model="newUser.name" placeholder="name" />' +
+          '<input id="swal-input2" class="swal2-input" type="email" v-model="newUser.email" placeholder="email" />' +
+          '<input id="swal-input3" class="swal2-input" type="password" v-model="newUser.password" placeholder="password" />',
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            // @ts-ignore
+            document.getElementById("swal-input1").value,
+            // @ts-ignore
+            document.getElementById("swal-input2").value,
+            // @ts-ignore
+            document.getElementById("swal-input3").value
+          ];
+        }
+      });
+      // console.log(formValues)
+      // debugger
+      if (formValues) {
+        return {
+          name: formValues[0],
+          email: formValues[1],
+          password: formValues[2]
+        };
+      }
+    } catch (error) {
+      return false;
+    }
+  }
   static async confirmAction(text = "You won't be able to revert this!") {
     try {
       let config = {
