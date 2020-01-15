@@ -1,32 +1,27 @@
 <template>
   <div class="container-fluid home">
     <div class="row">
-      <div class="col-12">
-        <h2>My Decks</h2>
-        <div class="row scroll-x justify-content-between">
-          <div class="col-3" v-for="userDeck in userDecks" :key="userDeck._id">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ userDeck.title }}</h5>
-                <p class="card-text">{{ userDeck.description }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
+      <div class="col-12 pt-5">
+        <h2 class="text-left">My Decks</h2>
+        <div class="row scroll-x">
+          <new-deck class="col-2"></new-deck>
+          <deck-sticker
+            class="col-2"
+            v-for="userDeck in userDecks"
+            :key="userDeck._id"
+            :deckData="userDeck"
+          ></deck-sticker>
         </div>
       </div>
-      <div class="col-12">
-        <h2>Public Decks</h2>
+      <div class="col-12 pt-5">
+        <h2 class="text-left">Public Decks</h2>
         <div class="row">
-          <div class="col-3" v-for="publicDeck in publicDecks" :key="publicDeck._id">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ publicDeck.title }}</h5>
-                <p class="card-text">{{ publicDeck.description }}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
+          <deck-sticker
+            class="col-2"
+            v-for="publicDeck in publicDecks"
+            :key="publicDeck._id"
+            :deckData="publicDeck"
+          ></deck-sticker>
         </div>
       </div>
     </div>
@@ -34,8 +29,14 @@
 </template>
 
 <script>
+import DeckSticker from "@/components/DeckSticker.vue";
+import NewDeck from "@/components/NewDeck.vue";
 export default {
   name: "home",
+  components: {
+    DeckSticker,
+    NewDeck
+  },
   mounted() {
     this.$store.dispatch("getUserDecks", this.$store.state.user._id);
     this.$store.dispatch("getPublicDecks");
@@ -50,6 +51,9 @@ export default {
     publicDecks() {
       return this.$store.state.publicDecks;
     }
+  },
+  methods: {
+    newDeck() {}
   }
 };
 </script>
@@ -72,5 +76,9 @@ scroll-x {
 
 .scroll-x::-webkit-scrollbar-thumb:hover {
   background-color: rgba(100, 100, 100, 0.9);
+}
+
+#add-deck {
+  font-size: 6rem;
 }
 </style>
