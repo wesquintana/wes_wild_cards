@@ -95,7 +95,7 @@ export default class DecksController {
   async removeCard(req, res, next) {
     try {
       let data = await _deckService.removeCard({ deckId: req.params.id, userId: req.session.uid, cardId: req.body._id })
-      return res.send(data)
+      return res.send("Successfully deleted card")
     } catch (error) { next(error) }
   }
 
