@@ -12,6 +12,7 @@ export default class UserController {
       .post("/login", this.login)
       .use(Authorize.authenticated)
       .get("/authenticate", this.authenticate)
+      .get("/:id/profile", this.getProfileByUserID)
       .delete("/logout", this.logout)
       .use(this.defaultRoute);
   }
@@ -64,6 +65,14 @@ export default class UserController {
           message: "Logout Successful"
         });
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getProfileByUserID(req, res, next) {
+    try {
+      let data = await _profileService.getProfileByUserId(req.session.uid);
+      return res.send(data);
     } catch (error) {
       next(error);
     }

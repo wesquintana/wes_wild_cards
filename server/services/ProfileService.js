@@ -5,6 +5,10 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Profile", Profile);
 
 class ProfileService {
+  async getProfileByUserId(id) {
+    let profile = await _repository.findOne({ userId: id });
+    return profile;
+  }
   async createProfile(profileInfo) {
     let profile = await _repository.create(profileInfo);
     return profile;
