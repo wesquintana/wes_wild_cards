@@ -15,8 +15,8 @@ export default class DecksController {
       .post('', this.createDeck)
       .post('/:id/cards', this.createCard)
       .put('/:id', this.editDeck)
-      .put('/:id/cards', this.removeCard)
-      .put('/:id/cards/:cardId', this.editCard)
+      .put("/:id/cards", this.removeCard)
+      .put('/:id/cards/:changes', this.editCard)
       .delete('/:id', this.removeDeck)
       .use(this.defaultRoute)
   }
@@ -77,6 +77,7 @@ export default class DecksController {
       next(error)
     }
   }
+
   async editDeck(req, res, next) {
     try {
       let data = await _deckService.editDeck(req.params.id, req.session.uid, req.body)
@@ -86,14 +87,14 @@ export default class DecksController {
 
   async editCard(req, res, next) {
     try {
-      let data = await _deckService.editCard(req.params.id, req.session.uid, req.body)
+      let data = await _deckService.editCard({ deckId: req.params.id, userId: req.session.uid, data: req.body })
       return res.send(data)
     } catch (error) { next(error) }
   }
 
   async removeCard(req, res, next) {
     try {
-      let data = await _deckService.removeCard({ _id: req.body.deckId, userId: req.session.uid, cardId: req.body._id })
+      let data = await _deckService.removeCard({ deckId: req.params.id, userId: req.session.uid, cardId: req.body._id })
       return res.send(data)
     } catch (error) { next(error) }
   }
