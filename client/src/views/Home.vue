@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid home">
     <div class="row">
-      <div class="col-12">
-        <h2>My Decks</h2>
+      <div class="col-12 pt-5">
+        <h2 class="text-left">My Decks</h2>
         <div class="row scroll-x">
           <div class="col-2">
             <div class="card" style="width: 10rem; height: 14rem;">
@@ -17,20 +17,20 @@
             <div class="card" style="width: 10rem; height: 14rem;">
               <div class="card-body">
                 <h5 class="card-title">{{ userDeck.title }}</h5>
-                <p class="card-text">{{ userDeck.description }}</p>
+                <p class="card-text text-left">{{ userDeck.description }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-12">
-        <h2>Public Decks</h2>
+      <div class="col-12 pt-5">
+        <h2 class="text-left">Public Decks</h2>
         <div class="row">
           <div class="col-2" v-for="publicDeck in publicDecks" :key="publicDeck._id">
             <div class="card" style="width: 10rem; height: 14rem;">
               <div class="card-body">
                 <h5 class="card-title">{{ publicDeck.title }}</h5>
-                <p class="card-text">{{ publicDeck.description }}</p>
+                <p class="card-text text-left">{{ publicDeck.description }}</p>
               </div>
             </div>
           </div>
