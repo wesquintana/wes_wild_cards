@@ -4,7 +4,7 @@ import { Authorize } from '../middleware/authorize.js'
 
 
 //PUBLIC
-export default class DecksController {
+export default class DeckController {
   constructor() {
     this.router = express.Router()
       .use(Authorize.authenticated)
