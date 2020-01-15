@@ -17,6 +17,12 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async editProfile({ commit, dispatch }, profileData) {
+      try {
+        let res = await api.put("api/profile/" + profileData.id, profileData);
+        console.log(res.data);
+      } catch (error) {}
     }
   }
 };

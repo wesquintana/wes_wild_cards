@@ -28,7 +28,11 @@ export default class UserController {
       req.session.uid = user._id;
 
       res.status(201).send(user);
-      let body = { name: req.body.name, userId: user._id };
+      let body = {
+        name: req.body.name,
+        userId: user._id,
+        imgURL: "https://robohash.org/" + req.body.name + ".png"
+      };
       let profile = await _profileService.createProfile(body);
     } catch (err) {
       next(err);

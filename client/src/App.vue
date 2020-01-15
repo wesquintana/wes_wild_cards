@@ -15,7 +15,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
+          <a class="dropdown-item" v-else @click="login">Log In</a>
           <a class="dropdown-item" href="#">Another action</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
@@ -26,14 +27,35 @@
 </template>
 
 <script>
+import NotificationService from "./utils/NotificationService.js";
 export default {
   name: "App",
+  data() {
+    return {};
+  },
   mounted() {
     this.$store.dispatch("getProfileById", this.$route.params.profileId);
   },
+  methods: {
+    async login() {
+      let loginInfo = await NotificationService.inputData(
+        "Enter Your Login Info"
+      );
+      if (loginInfo) {
+        this.$store.dispatch("login", loginInfo);
+      }
+    },
+    async logout() {
+      this.$store.dispatch("logout");
+    }
+  },
+
   computed: {
     activeProfile() {
       return this.$store.state.activeProfile;
+    },
+    user() {
+      return this.$store.state.user;
     }
   }
 };
