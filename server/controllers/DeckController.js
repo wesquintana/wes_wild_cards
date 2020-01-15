@@ -29,7 +29,7 @@ export default class DecksController {
 
   async getAllPublic(req, res, next) {
     try {
-      //only gets decks by user who is logged in
+      //only gets decks where public = true
       let data = await _deckService.getAllPublic()
       return res.send(data)
     }

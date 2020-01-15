@@ -6,7 +6,11 @@ const _repository = mongoose.model('Deck', Deck)
 
 class DeckService {
   async getAllPublic() {
-    return await _repository.find({})
+    let data = await _repository.find({ isPrivate: false })
+    if (!data) {
+      throw new ApiError("Request for public decks not found", 404)
+    }
+    return data
   }
 
   async getAllByUserId(userId) {
