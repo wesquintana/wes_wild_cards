@@ -17,7 +17,7 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
           <a class="dropdown-item" v-else @click="login">Log In</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" v-if="!user.hasOwnProperty('email')" @click="register">Register</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </div>
@@ -47,6 +47,14 @@ export default {
     },
     async logout() {
       this.$store.dispatch("logout");
+    },
+    async register() {
+      let registerInfo = await NotificationService.registerData(
+        "Create Your Profile"
+      );
+      if (registerInfo) {
+        this.$store.dispatch("register", registerInfo);
+      }
     }
   },
 

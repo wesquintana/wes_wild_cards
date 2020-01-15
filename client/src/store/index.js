@@ -53,6 +53,7 @@ export default new Vuex.Store({
       try {
         let user = await AuthService.Register(creds);
         commit("setUser", user);
+        router.go(0);
       } catch (e) {
         console.warn(e.message);
       }
