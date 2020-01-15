@@ -63,8 +63,8 @@ class DeckService {
   // TEST rawData equals a full card obj sent when editing
   async editCard(payload) {
     let data = await _repository.findOneAndUpdate(
-      { cards: { _id: payload.data }, _id: payload.deckId, authorId: payload.userId },
-      { $set: { cards: { _id: payload.data._id } } },
+      { _id: payload.deckId, authorId: payload.userId, "cards._id": payload.data._id },
+      { $set: { "cards.$": payload.data } },
       { new: true })
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400)

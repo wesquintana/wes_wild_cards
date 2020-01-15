@@ -10,7 +10,7 @@ const Card = new Schema({
   imgFace: { type: String, required: false },
   imgBack: { type: String, required: false },
   category: { type: String, required: false }
-}, { timestamps: true });
+});
 // NOTE Card has to be the end of the inheritance chain and is dependent upon the parent (cannot be retrieved on its own without parent)
 
 const Deck = new Schema({
