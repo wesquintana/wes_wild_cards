@@ -25,9 +25,10 @@ export default new Vuex.Store({
   state: {
     user: {},
     profile: {},
-    boards: [],
-    activeBoard: {},
-    activeProfile: {}
+    activeProfile: {},
+    userDecks: [],
+    publicDecks: [],
+    activeDeck: {}
   },
   mutations: {
     setUser(state, user) {
@@ -35,9 +36,6 @@ export default new Vuex.Store({
     },
     setResource(state, payload) {
       state[payload.name] = payload.data;
-    },
-    setBoards(state, boards) {
-      state.boards = boards;
     }
   },
   actions: {
@@ -82,16 +80,7 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- BOARDS --
-    getBoards({ commit, dispatch }) {
-      api.get("boards").then(res => {
-        commit("setBoards", res.data);
-      });
-    },
-    addBoard({ commit, dispatch }, boardData) {
-      api.post("boards", boardData).then(serverBoard => {
-        dispatch("getBoards");
-      });
-    }
+
     //#endregion
 
     //#region -- LISTS --
