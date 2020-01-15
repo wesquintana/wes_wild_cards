@@ -5,8 +5,19 @@ import ApiError from "../utils/ApiError"
 const _repository = mongoose.model('Deck', Deck)
 
 class DeckService {
+
+  // SECTION Deck calls
   async getAllPublic() {
     let data = await _repository.find({ isPrivate: false })
+    if (!data) {
+      throw new ApiError("Request for public decks not found", 404)
+    }
+    return data
+  }
+
+  // function to retrieve public decks of a user. userId is set by params from controller, NOT by session/logged in user
+  async getPublicDecksByUserId(userId) {
+    let data = await _repository.find({ authorId: userId, isPrivate: false })
     if (!data) {
       throw new ApiError("Request for public decks not found", 404)
     }
@@ -36,6 +47,22 @@ class DeckService {
     return data
   }
 
+  async editDeck(id, userId, update) {
+    let data = await _repository.findOneAndUpdate({ _id: id, authorId: userId }, update, { new: true })
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this deck", 400);
+    }
+    return data;
+  }
+
+  async removeDeck(id, userId) {
+    let data = await _repository.findOneAndRemove({ _id: id, authorId: userId });
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this deck", 400);
+    }
+  }
+
+  // SECTION Card calls
   async createCard(deckId, rawData) {
     let data = await _repository.findOneAndUpdate(
       { _id: deckId },
@@ -56,14 +83,6 @@ class DeckService {
     return data;
   }
 
-  async editDeck(id, userId, update) {
-    let data = await _repository.findOneAndUpdate({ _id: id, authorId: userId }, update, { new: true })
-    if (!data) {
-      throw new ApiError("Invalid ID or you do not own this deck", 400);
-    }
-    return data;
-  }
-
   // TEST rawData equals a full card obj sent when editing
   async editCard(payload) {
     let data = await _repository.findOneAndUpdate(
@@ -76,13 +95,6 @@ class DeckService {
     return data
   }
 
-  async removeDeck(id, userId) {
-    let data = await _repository.findOneAndRemove({ _id: id, authorId: userId });
-    if (!data) {
-      throw new ApiError("Invalid ID or you do not own this deck", 400);
-    }
-  }
-
   async removeCard(payload) {
     let data = await _repository.findOneAndUpdate(
       { _id: payload.deckId, authorId: payload.userId },
@@ -92,9 +104,7 @@ class DeckService {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
     }
   }
-
 }
-
 
 const _deckService = new DeckService()
 export default _deckService
