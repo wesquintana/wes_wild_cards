@@ -4,6 +4,7 @@ import Axios from "axios";
 import router from "../router/index";
 import AuthService from "../AuthService";
 import profileModule from "./ProfileModule";
+import deckModule from "./DeckModule"
 
 Vue.use(Vuex);
 
@@ -20,14 +21,16 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   modules: {
-    profileModule
+    profileModule,
+    deckModule
   },
   state: {
     user: {},
     profile: {},
-    boards: [],
-    activeBoard: {},
-    activeProfile: {}
+    activeProfile: {},
+    userDecks: [],
+    publicDecks: [],
+    activeDeck: {}
   },
   mutations: {
     setUser(state, user) {
@@ -35,9 +38,6 @@ export default new Vuex.Store({
     },
     setResource(state, payload) {
       state[payload.name] = payload.data;
-    },
-    setBoards(state, boards) {
-      state.boards = boards;
     }
   },
   actions: {
@@ -82,16 +82,7 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- BOARDS --
-    getBoards({ commit, dispatch }) {
-      api.get("boards").then(res => {
-        commit("setBoards", res.data);
-      });
-    },
-    addBoard({ commit, dispatch }, boardData) {
-      api.post("boards", boardData).then(serverBoard => {
-        dispatch("getBoards");
-      });
-    }
+
     //#endregion
 
     //#region -- LISTS --
