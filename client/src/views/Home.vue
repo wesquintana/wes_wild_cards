@@ -4,36 +4,24 @@
       <div class="col-12 pt-5">
         <h2 class="text-left">My Decks</h2>
         <div class="row scroll-x">
-          <div class="col-2">
-            <div class="card" style="width: 10rem; height: 14rem;">
-              <div class="card-body">
-                <h5 class="card-title mt-2">New Deck</h5>
-                <div class="d-flex justify-content-center align-items-center"></div>
-                <i class="fas fa-plus" id="add-deck"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-2" v-for="userDeck in userDecks" :key="userDeck._id">
-            <div class="card" style="width: 10rem; height: 14rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ userDeck.title }}</h5>
-                <p class="card-text text-left">{{ userDeck.description }}</p>
-              </div>
-            </div>
-          </div>
+          <new-deck class="col-2"></new-deck>
+          <deck-sticker
+            class="col-2"
+            v-for="userDeck in userDecks"
+            :key="userDeck._id"
+            :deckData="userDeck"
+          ></deck-sticker>
         </div>
       </div>
       <div class="col-12 pt-5">
         <h2 class="text-left">Public Decks</h2>
         <div class="row">
-          <div class="col-2" v-for="publicDeck in publicDecks" :key="publicDeck._id">
-            <div class="card" style="width: 10rem; height: 14rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ publicDeck.title }}</h5>
-                <p class="card-text text-left">{{ publicDeck.description }}</p>
-              </div>
-            </div>
-          </div>
+          <deck-sticker
+            class="col-2"
+            v-for="publicDeck in publicDecks"
+            :key="publicDeck._id"
+            :deckData="publicDeck"
+          ></deck-sticker>
         </div>
       </div>
     </div>
@@ -41,8 +29,14 @@
 </template>
 
 <script>
+import DeckSticker from "@/components/DeckSticker.vue";
+import NewDeck from "@/components/NewDeck.vue";
 export default {
   name: "home",
+  components: {
+    DeckSticker,
+    NewDeck
+  },
   mounted() {
     this.$store.dispatch("getUserDecks", this.$store.state.user._id);
     this.$store.dispatch("getPublicDecks");
@@ -57,6 +51,9 @@ export default {
     publicDecks() {
       return this.$store.state.publicDecks;
     }
+  },
+  methods: {
+    newDeck() {}
   }
 };
 </script>
