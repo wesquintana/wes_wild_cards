@@ -16,7 +16,7 @@ export default class DecksController {
       .post('/:id/cards', this.createCard)
       .put('/:id', this.editDeck)
       .put('/:id/cards', this.removeCard)
-      .put('/:id/cards/:id', this.editCard)
+      .put('/:id/cards/:cardId', this.editCard)
       .delete('/:id', this.removeDeck)
       .use(this.defaultRoute)
   }

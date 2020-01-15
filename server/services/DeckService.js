@@ -40,10 +40,12 @@ class DeckService {
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400)
     }
+    return data
   }
 
+  // NOTE call works, but still attached to deck
   async getCards(deckId) {
-    let data = await _repository.find({ deckId: deckId });
+    let data = await _repository.find({ _id: deckId });
     if (!data) {
       throw new ApiError("Invalid Id", 400);
     }
@@ -61,12 +63,13 @@ class DeckService {
   // TEST rawData equals a full card obj sent when editing
   async editCard(deckId, userId, rawData) {
     let data = await _repository.findOneAndUpdate(
-      { _id: deckId, authorId: userId, "cards._id": rawData._id },
-      { $set: { "cards.$": rawData } },
+      { _id: deckId, authorId: userId },
+      { $set: { cards._id: rawData._id }, rawData },
       { new: true })
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this deck", 400)
     }
+    return data
   }
 
   async removeDeck(id, userId) {
@@ -79,11 +82,12 @@ class DeckService {
   async removeCard(payload) {
     let data = await _repository.findOneAndUpdate(
       { _id: payload.deckId, authorId: payload.userId },
-      { $pull: { cards: { _id: payload.cardId } } },
+      { $pull: { cards: payload._id } },
       { new: true });
     if (!data) {
-      throw new ApiError("Invalid ID or you do not own this comment", 400);
+      throw new ApiError("Invalid ID or you do not own this deck", 400);
     }
+    return data
   }
 
 }
