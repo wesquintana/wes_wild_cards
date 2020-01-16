@@ -75,6 +75,7 @@ export default new Vuex.Store({
         if (!success) {
         }
         commit("resetState");
+        router.go(0);
       } catch (e) {
         console.warn(e.message);
       }

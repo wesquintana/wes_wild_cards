@@ -26,7 +26,7 @@
         </div>
       </div>
     </nav>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
