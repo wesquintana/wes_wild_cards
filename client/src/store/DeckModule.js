@@ -38,6 +38,17 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async addCard({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post(
+          "decks/" + payload.id + "/cards",
+          payload.data
+        );
+        commit("addCard", res.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

@@ -47,6 +47,9 @@ export default new Vuex.Store({
       state.userDecks = [];
       state.activeDeck = {};
       state.profileDecks = [];
+    },
+    addCard(state, card) {
+      state.activeDeck.cards.push(card);
     }
   },
   actions: {
