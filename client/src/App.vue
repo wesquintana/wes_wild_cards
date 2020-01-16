@@ -26,7 +26,7 @@
         </div>
       </div>
     </nav>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getProfileById", this.$route.params.profileId);
+    this.$store.dispatch("getPersonalProfileByUserId", this.user._id);
   },
   methods: {
     async login() {
