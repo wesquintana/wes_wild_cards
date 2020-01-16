@@ -15,21 +15,31 @@
         <textarea v-else name id cols="30" rows="10" v-model="profile.description"></textarea>
       </div>
     </div>
+    <div class="row">
+      <deck-sticker
+        class="col-2"
+        v-for="profileDeck in profileDecks"
+        :key="profileDeck._id"
+        :deckData="profileDeck"
+      ></deck-sticker>
+    </div>
   </div>
 </template>
 <script>
+import deckSticker from "../components/DeckSticker";
 export default {
   name: "Profile",
+  components: {
+    deckSticker
+  },
   data() {
     return {
       editing: true
     };
   },
   mounted() {
-    this.$store.dispatch("getResourceById", {
-      name: "profile",
-      id: this.$route.params.profileId
-    });
+    this.$store.dispatch("getProfileById", this.$route.params.profileId);
+    // this.$store.dispatch("getPublicDecksByUserId", this.profile.userId);
   },
   methods: {
     startEditing() {
@@ -50,6 +60,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    profileDecks() {
+      return this.$store.state.profileDecks;
     }
   }
 };
