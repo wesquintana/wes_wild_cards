@@ -18,7 +18,11 @@
           <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
           <a class="dropdown-item" v-else @click="login">Log In</a>
           <a class="dropdown-item" v-if="!user.hasOwnProperty('email')" @click="register">Register</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <router-link
+            :to="{name: 'profile', params: {profileId: this.activeProfile._id}}"
+            class="dropdown-item"
+            v-if="user.hasOwnProperty('email')"
+          >Profile</router-link>
         </div>
       </div>
     </nav>
