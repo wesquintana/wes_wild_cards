@@ -48,8 +48,12 @@ export default new Vuex.Store({
       state.activeDeck = {};
       state.profileDecks = [];
     },
+    addUserDeck(state, payload) {
+      state.userDecks.push(payload);
+
     addCard(state, card) {
       state.activeDeck.cards.push(card);
+
     }
   },
   actions: {
@@ -91,6 +95,7 @@ export default new Vuex.Store({
         console.error(error);
       }
     }
+
     //#endregion
 
     //#region -- BOARDS --

@@ -1,8 +1,20 @@
 <template>
   <div class="container-fluid deck-details">
     <div class="row">
-      <div class="col-12 pt-5">
-        <h2 class="text-left">Cards</h2>
+      <div class="col-3 text-left">
+        <button
+          v-if="this.$store.state.user._id === this.activeDeck.authorId"
+          class="btn btn-primary"
+        >Edit</button>
+      </div>
+      <div class="col-6">
+        <h2 class="text-center">{{activeDeck.title}}</h2>
+      </div>
+      <div class="col-3">
+        <rules :deckData="activeDeck">Rules</rules>
+      </div>
+      <div class="col-12">
+        <h4 class="text-left">Cards</h4>
         <div class="row scroll-x">
           <!-- plug in spot to create a card -->
           <!-- <new-card class="col-2"></new-card> -->
@@ -21,13 +33,15 @@
 
 <script>
 import cardSticker from "../components/CardSticker";
+import rules from "../components/Rules";
 export default {
   name: "deckDetails",
   components: {
-    cardSticker
+    cardSticker,
+    rules
   },
   mounted() {
-    // this.$store.dispatch("getActiveDeck", this.$route.params.id);
+    this.$store.dispatch("getDeckById", this.$route.params.id);
   },
   computed: {
     activeDeck() {
