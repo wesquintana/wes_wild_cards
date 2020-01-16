@@ -50,6 +50,10 @@ export default new Vuex.Store({
     },
     addUserDeck(state, payload) {
       state.userDecks.push(payload);
+
+    addCard(state, card) {
+      state.activeDeck.cards.push(card);
+
     }
   },
   actions: {
