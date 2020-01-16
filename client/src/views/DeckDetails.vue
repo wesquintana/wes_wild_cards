@@ -1,8 +1,11 @@
 <template>
   <div class="container-fluid deck-details">
     <div class="row">
-      <div class="col-3 text-left" v-if="this.$store.state.user._id === this.activeDeck.authorId">
-        <button class="btn btn-primary">Edit</button>
+      <div class="col-3 text-left">
+        <button
+          v-if="this.$store.state.user._id === this.activeDeck.authorId"
+          class="btn btn-primary"
+        >Edit</button>
       </div>
       <div class="col-6">
         <h2 class="text-center">{{activeDeck.title}}</h2>
