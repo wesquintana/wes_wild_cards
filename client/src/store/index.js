@@ -30,7 +30,8 @@ export default new Vuex.Store({
     activeProfile: {},
     userDecks: [],
     publicDecks: [],
-    activeDeck: {}
+    activeDeck: {},
+    profileDecks: []
   },
   mutations: {
     setUser(state, user) {
@@ -45,6 +46,7 @@ export default new Vuex.Store({
       state.activeProfile = {};
       state.userDecks = [];
       state.activeDeck = {};
+      state.profileDecks = [];
     }
   },
   actions: {
