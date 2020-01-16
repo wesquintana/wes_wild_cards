@@ -1,9 +1,9 @@
 <template>
   <div class="deck-sticker">
-    <div class="card" style="width: 10rem; height: 14rem;">
+    <div class="card mb-2" style="width: 10rem; height: 14rem;">
       <div class="card-body">
-        <h5 class="card-title">{{ deckData.title }}</h5>
-        <p class="card-text text-left">{{ deckData.description }}</p>
+        <h5 class="card-title text-wrap">{{ deckData.title }}</h5>
+        <p class="card-text text-left text-wrap">{{ deckData.description }}</p>
       </div>
     </div>
   </div>
