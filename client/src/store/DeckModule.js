@@ -41,7 +41,6 @@ export default {
     },
     async getDeckById({ commit, dispatch }, id) {
       try {
-        debugger;
         let res = await api.get("decks/" + id);
         commit("setResource", { name: "activeDeck", data: res.data });
       } catch (error) {
