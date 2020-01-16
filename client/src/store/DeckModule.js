@@ -30,7 +30,7 @@ export default {
     async addDeck({ commit, dispatch }, payload) {
       try {
         let res = await api.post("decks", payload);
-        commit("setResource", { name: "activeDeck", data: res.data });
+        commit("addUserDeck", res.data);
         router.push({
           name: "deckDetails",
           params: { id: res.data._id }
