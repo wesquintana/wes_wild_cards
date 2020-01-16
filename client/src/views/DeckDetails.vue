@@ -27,7 +27,7 @@ export default {
     cardSticker
   },
   mounted() {
-    // this.$store.dispatch("getActiveDeck", this.$route.params.id);
+    this.$store.dispatch("getDeckById", this.$route.params.id);
   },
   computed: {
     activeDeck() {
