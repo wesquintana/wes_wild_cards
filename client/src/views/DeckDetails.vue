@@ -8,7 +8,7 @@
         <h2 class="text-center">{{activeDeck.title}}</h2>
       </div>
       <div class="col-3">
-        <h4>Rules</h4>
+        <rules :deckData="activeDeck">Rules</rules>
       </div>
       <div class="col-12">
         <h4 class="text-left">Cards</h4>
@@ -30,10 +30,12 @@
 
 <script>
 import cardSticker from "../components/CardSticker";
+import rules from "../components/Rules";
 export default {
   name: "deckDetails",
   components: {
-    cardSticker
+    cardSticker,
+    rules
   },
   mounted() {
     this.$store.dispatch("getDeckById", this.$route.params.id);
