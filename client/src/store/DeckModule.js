@@ -44,7 +44,10 @@ export default {
       try {
         let res = await api.get("decks/" + id);
         commit("setResource", { name: "activeDeck", data: res.data });
-
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async addCard({ commit, dispatch }, payload) {
       try {
         let res = await api.post(
