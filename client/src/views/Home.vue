@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid home">
     <div class="row">
-      <div class="col-12 pt-5">
+      <div class="col-12 pt-3">
         <h2 class="text-left">My Decks</h2>
         <div class="row scroll-x">
           <new-deck class="col-2"></new-deck>
@@ -13,7 +13,7 @@
           ></deck-sticker>
         </div>
       </div>
-      <div class="col-12 pt-5">
+      <div class="col-12 pt-3">
         <h2 class="text-left">Public Decks</h2>
         <div class="row">
           <deck-sticker
