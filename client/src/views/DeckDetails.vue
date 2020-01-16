@@ -18,7 +18,7 @@
         <h4 class="text-left">Cards</h4>
         <div class="row scroll-x">
           <!-- plug in spot to create a card -->
-          <!-- <new-card class="col-2"></new-card> -->
+          <new-card class="col-2"></new-card>
           <!-- plug in all cards in deck -->
           <card-sticker
             class="col-2"
@@ -35,11 +35,13 @@
 <script>
 import cardSticker from "../components/CardSticker";
 import rules from "../components/Rules";
+import newCard from "../components/NewCard";
 export default {
   name: "deckDetails",
   components: {
     cardSticker,
-    rules
+    rules,
+    newCard
   },
   mounted() {
     this.$store.dispatch("getDeckById", this.$route.params.id);
@@ -55,5 +57,8 @@ export default {
 <style>
 .rules:hover {
   cursor: pointer;
+}
+#add-card {
+  font-size: 4rem;
 }
 </style>
