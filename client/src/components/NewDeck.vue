@@ -31,9 +31,9 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <!-- Form code -->
           <form @submit.prevent="addDeck">
             <div class="modal-body">
-              <!-- Form code -->
               <div class="form-group text-left">
                 <label for="newDeckTitle">Deck Title</label>
                 <input
@@ -79,17 +79,17 @@
                   for="privacySwitch"
                 >Select this deck's privacy setting</label>
               </div>
-
-              <!-- end Form code -->
             </div>
             <div class="modal-footer d-flex justify-content-center">
               <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
               <button type="submit" class="btn btn-primary d-flex justify-content-left">Create deck!</button>
             </div>
           </form>
+          <!-- end Form code -->
         </div>
       </div>
     </div>
+    <!-- end modal code -->
   </div>
 </template>
 
@@ -108,7 +108,7 @@ export default {
         isPrivate: true,
         cards: [],
         img: "",
-        name: "activeDeck"
+        name: "activeDeck" // can probably drop this
       }
     };
   },
@@ -119,8 +119,7 @@ export default {
       this.newDeck.title = "";
       this.newDeck.description = "";
       this.newDeck.rules = "Add rules to your deck";
-      this.newDeck.isPrivate = "true";
-      this.newDeck.cards = [];
+      this.newDeck.isPrivate = true;
       this.newDeck.img = "";
     }
   }
