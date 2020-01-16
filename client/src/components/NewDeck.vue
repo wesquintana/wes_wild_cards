@@ -16,7 +16,7 @@
     <!-- modal code -->
     <div
       class="modal fade"
-      data-backdrop="static"
+      data-backdrop
       id="newDeckModal"
       tabindex="-1"
       role="dialog"

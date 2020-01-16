@@ -1,7 +1,11 @@
-<template></template>
+<template>
+  <div class="deck-details"></div>
+</template>
 
 <script>
-export default {};
+export default {
+  name: "deckDetails"
+};
 </script>
 
 <style>
