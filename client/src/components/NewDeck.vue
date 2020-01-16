@@ -31,7 +31,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form>
+          <form @submit.prevent="addDeck">
             <div class="modal-body">
               <!-- Form code -->
               <div class="form-group text-left">
@@ -56,7 +56,13 @@
                 ></textarea>
               </div>
               <div class="form-group text-left">
-                <input v-model="newDeck.img" type="text" class="form-control" id="deckImg" placeholder="paste URL here..."/>
+                <input
+                  v-model="newDeck.img"
+                  type="text"
+                  class="form-control"
+                  id="deckImg"
+                  placeholder="paste URL here..."
+                />
                 <label class="form-group-label" for="deckImg">Choose file, optional</label>
               </div>
               <!-- toggle switch for privacy setting -->
@@ -101,12 +107,22 @@ export default {
         rules: "Add rules to your deck",
         isPrivate: true,
         cards: [],
-        img: ""
+        img: "",
+        name: "activeDeck"
       }
     };
   },
   methods: {
-    newDeck() {}
+    addDeck() {
+      let deck = { ...this.newDeck };
+      this.$store.dispatch("addDeck", deck);
+      this.newDeck.title = "";
+      this.newDeck.description = "";
+      this.newDeck.rules = "Add rules to your deck";
+      this.newDeck.isPrivate = "true";
+      this.newDeck.cards = [];
+      this.newDeck.img = "";
+    }
   }
 };
 </script>

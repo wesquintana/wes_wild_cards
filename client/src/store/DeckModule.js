@@ -25,6 +25,14 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async addDeck({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("decks/" + payload);
+        commit("setResource", { name: "activeDecks", data: res.data });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };
