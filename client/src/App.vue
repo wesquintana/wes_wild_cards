@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <router-link class="navbar-brand" :to="{name:'home'}" href="#">Navbar</router-link>
       <div class="dropdown">
         {{activeProfile.name}}
         <button
