@@ -37,27 +37,37 @@
               <div class="form-group text-left">
                 <label for="newDeckTitle">Deck Title</label>
                 <input
+                  v-model="newDeck.title"
                   type="text"
                   class="form-control"
                   id="newDeckTitle"
                   placeholder="Name your deck"
+                  required
                 />
               </div>
               <div class="form-group text-left">
                 <label for="newDeckDesc">Deck description</label>
                 <textarea
+                  v-model="newDeck.description"
                   class="form-control"
                   id="newDeckDesc"
                   placeholder="Share some details about your deck..."
+                  required
                 ></textarea>
               </div>
-              <div class="custom-file text-left">
-                <input type="file" class="custom-file-input" id="deckImg" />
-                <label class="custom-file-label" for="deckImg">Choose file, optional</label>
+              <div class="form-group text-left">
+                <input v-model="newDeck.img" type="text" class="form-control" id="deckImg" placeholder="paste URL here..."/>
+                <label class="form-group-label" for="deckImg">Choose file, optional</label>
               </div>
               <!-- toggle switch for privacy setting -->
               <div class="custom-control custom-switch text-left mt-3">
-                <input type="checkbox" class="custom-control-input" id="privacySwitch" />
+                <!-- TODO look at how to set the toggle for isPrivate -->
+                <input
+                  v-model="newDeck.isPrivate"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="privacySwitch"
+                />
                 <label
                   class="custom-control-label"
                   for="privacySwitch"
@@ -66,8 +76,8 @@
 
               <!-- end Form code -->
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-center">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
               <button type="submit" class="btn btn-primary d-flex justify-content-left">Create deck!</button>
             </div>
           </form>
@@ -79,8 +89,22 @@
 
 <script>
 export default {
-  name: "DeckSticker",
+  name: "NewDeck",
   mounted() {},
+  data() {
+    return {
+      newDeck: {
+        title: "",
+        authorId: this.$store.state.user._id,
+        description: "",
+        category: "",
+        rules: "Add rules to your deck",
+        isPrivate: true,
+        cards: [],
+        img: ""
+      }
+    };
+  },
   methods: {
     newDeck() {}
   }
