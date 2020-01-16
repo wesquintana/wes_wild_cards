@@ -20,15 +20,16 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>{{deckData.rules}}</p>
+            <p v-if="editing">{{deckData.rules}}</p>
+            <textarea v-else name id cols="30" rows="10" v-model="deckData.rules"></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button
-              type="button"
               class="btn btn-primary"
-              v-if="this.$store.state.user._id === this.deckData.authorId"
+              v-if="editing && this.$store.state.user._id === this.deckData.authorId"
+              @click="startEditing"
             >Edit</button>
+            <button v-else class="btn btn-success" @click="submitEdits">Done</button>
           </div>
         </div>
       </div>
@@ -39,7 +40,24 @@
 <script>
 export default {
   name: "rules",
-  props: ["deckData"]
+  props: ["deckData"],
+  data() {
+    return {
+      editing: true
+    };
+  },
+  methods: {
+    startEditing() {
+      this.editing = !this.editing;
+    },
+    submitEdits() {
+      this.$store.dispatch("editRules", {
+        id: this.deckData._id,
+        rules: this.deckData.rules
+      });
+      this.editing = !this.editing;
+    }
+  }
 };
 </script>
 
