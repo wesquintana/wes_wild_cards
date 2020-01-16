@@ -9,9 +9,10 @@
       </div>
       <div class="col-6">
         <h2 class="text-center">{{activeDeck.title}}</h2>
+        <p>{{activeDeck.description}}</p>
       </div>
       <div class="col-3">
-        <rules :deckData="activeDeck">Rules</rules>
+        <rules class="rules" :deckData="activeDeck">Rules</rules>
       </div>
       <div class="col-12">
         <h4 class="text-left">Cards</h4>
@@ -52,4 +53,7 @@ export default {
 </script>
 
 <style>
+.rules:hover {
+  cursor: pointer;
+}
 </style>
