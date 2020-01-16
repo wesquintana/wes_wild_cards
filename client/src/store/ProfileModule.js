@@ -21,7 +21,10 @@ export default {
     async editProfile({ commit, dispatch }, profileData) {
       try {
         let res = await api.put("api/profile/" + profileData.id, profileData);
-        console.log(res.data);
+        if (res.hasOwnProperty("data")) {
+          commit("setResource", { name: "profile", data: res.data });
+          commit("setResource", { name: "activeProfile", data: res.data });
+        }
       } catch (error) {}
     }
   }
