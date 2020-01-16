@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style>
-scroll-x {
+.scroll-x {
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
