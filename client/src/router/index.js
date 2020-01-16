@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Deck from "../views/Deck.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
+import DeckDetails from "../views/DeckDetails";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/profile/:profileId",
       name: "profile",
       component: Profile
+    },
+    {
+      path: "/deck/:id",
+      name: "deckDetails",
+      component: DeckDetails
     },
     {
       path: "*",

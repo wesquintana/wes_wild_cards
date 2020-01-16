@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router";
 let base = window.location.host.includes("localhost:8080")
   ? "//localhost:3000/"
   : "/";
@@ -22,6 +23,18 @@ export default {
       try {
         let res = await api.get("decks/private/" + id);
         commit("setResource", { name: "userDecks", data: res.data });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addDeck({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post("decks", payload);
+        commit("setResource", { name: "activeDecks", data: res.data });
+        router.push({
+          name: "deckDetails",
+          params: { id: res.data._id }
+        });
       } catch (error) {
         console.error(error);
       }
