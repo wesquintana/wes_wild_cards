@@ -39,15 +39,10 @@ export default {
         console.error(error);
       }
     },
-    async getDeckById({ commit, dispatch }, payload) {
+    async getDeckById({ commit, dispatch }, id) {
       try {
-        debugger;
-        let res = await api.get("decks", payload._id);
+        let res = await api.get("decks/" + id);
         commit("setResource", { name: "activeDeck", data: res.data });
-        router.push({
-          name: "deckDetails",
-          params: { id: res.data._id }
-        });
       } catch (error) {
         console.error(error);
       }
