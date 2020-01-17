@@ -11,6 +11,17 @@ let api = axios.create({
 });
 export default {
   actions: {
+    async addCard({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post(
+          "decks/" + payload.id + "/cards",
+          payload.data
+        );
+        commit("addCard", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     setActiveCard({ commit, dispatch }, card) {
       commit("setResource", { name: "activeCard", data: card });
     }
