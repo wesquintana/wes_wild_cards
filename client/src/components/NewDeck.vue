@@ -16,7 +16,7 @@
     <!-- modal code -->
     <div
       class="modal fade"
-      data-backdrop
+      data-backdrop="static"
       id="newDeckModal"
       tabindex="-1"
       role="dialog"
@@ -74,10 +74,17 @@
                   class="custom-control-input"
                   id="privacySwitch"
                 />
+                <p>Privacy settings:</p>
                 <label
+                  v-if="this.newDeck.isPrivate"
                   class="custom-control-label"
                   for="privacySwitch"
-                >Select this deck's privacy setting</label>
+                >Private</label>
+                <label
+                  v-else-if="!this.newDeck.isPrivate"
+                  class="custom-control-label"
+                  for="privacySwitch"
+                >Public</label>
               </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
@@ -114,6 +121,7 @@ export default {
   },
   methods: {
     addDeck() {
+      $("#newDeckModal").modal("hide");
       let deck = { ...this.newDeck };
       this.$store.dispatch("addDeck", deck);
       this.newDeck.title = "";
