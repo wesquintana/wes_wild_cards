@@ -74,10 +74,17 @@
                   class="custom-control-input"
                   id="privacySwitch"
                 />
+                <p>Privacy settings:</p>
                 <label
+                  v-if="this.newDeck.isPrivate"
                   class="custom-control-label"
                   for="privacySwitch"
-                >Select this deck's privacy setting</label>
+                >Private</label>
+                <label
+                  v-else-if="!this.newDeck.isPrivate"
+                  class="custom-control-label"
+                  for="privacySwitch"
+                >Public</label>
               </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">

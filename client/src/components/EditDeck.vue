@@ -70,6 +70,7 @@
                   class="custom-control-input"
                   id="privacySwitch"
                 />
+                <p>Privacy settings:</p>
                 <label
                   v-if="this.deckData.isPrivate"
                   class="custom-control-label"
