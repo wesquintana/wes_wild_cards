@@ -62,6 +62,25 @@
                   aria-describedby="inputGroup-sizing-default"
                 />
               </div>
+              <div class="custom-control custom-switch text-left mt-3">
+                <!-- TODO look at how to set the toggle for isPrivate -->
+                <input
+                  v-model="deckData.isPrivate"
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="privacySwitch"
+                />
+                <label
+                  v-if="this.deckData.isPrivate"
+                  class="custom-control-label"
+                  for="privacySwitch"
+                >Private</label>
+                <label
+                  v-else-if="!this.deckData.isPrivate"
+                  class="custom-control-label"
+                  for="privacySwitch"
+                >Public</label>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -84,7 +103,8 @@ export default {
         _id: this.deckData._id,
         title: this.deckData.title,
         description: this.deckData.description,
-        img: this.deckData.img
+        img: this.deckData.img,
+        isPrivate: this.deckData.isPrivate
       });
       $("#editDeckModal").modal("hide");
     }
