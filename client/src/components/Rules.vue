@@ -25,17 +25,29 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <p v-if="editing">{{deckData.rules}}</p>
-            <textarea v-else name id cols="auto" rows="10" v-model="deckData.rules"></textarea>
+          <div v-if="editing">
+            <div class="modal-body">
+              <p>{{deckData.rules}}</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-primary"
+                v-if=" this.$store.state.user._id === this.deckData.authorId"
+                @click="startEditing"
+              >Edit</button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button
-              class="btn btn-primary"
-              v-if="editing && this.$store.state.user._id === this.deckData.authorId"
-              @click="startEditing"
-            >Edit</button>
-            <button v-else class="btn btn-success" @click="submitEdits">Done</button>
+          <div v-if="!editing">
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <textarea name id cols="auto" rows="10" v-model="deckData.rules"></textarea>
+                </div>
+                <div class="modal-footer"></div>
+
+                <button class="btn btn-success" @click="submitEdits">Done</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
