@@ -81,4 +81,9 @@ export default {
 #add-deck {
   font-size: 6rem;
 }
+
+.home {
+  background-image: url("../assets/felt.jpg");
+  background-size: 250px;
+}
 </style>
