@@ -14,7 +14,13 @@
           <div class="modal-header text-center col">
             <h5 class="modal-title" id="activeCardModalLabel">{{ activeCard.name }}</h5>
             <!--TODO create clear Active Card method -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              @click="flipped=false"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -22,18 +28,16 @@
             <div class="col">
               <!-- card code -->
               <div class="card mb-4" style="width: 20rem; height: 28rem;" v-if="!flipped">
-                <div v-if="flipped">
-                  <div class="card-body d-inline-flex justify-content-between">
-                    <h5 class="card-title text-wrap">{{ activeCard.name }}</h5>
-                    <h5 class="card-title text-wrap">{{ activeCard.category }}</h5>
-                  </div>
-                  <div class="card-body">
-                    <!-- card face image (top half of card) -->
-                    <img :src="activeCard.imgFace" placeholder />
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text text-left text-wrap">{{ activeCard.content }}</p>
-                  </div>
+                <div class="card-body d-inline-flex justify-content-between">
+                  <h5 class="card-title text-wrap">{{ activeCard.name }}</h5>
+                  <h5 class="card-title text-wrap">{{ activeCard.category }}</h5>
+                </div>
+                <div class="card-body">
+                  <!-- card face image (top half of card) -->
+                  <img :src="activeCard.imgFace" placeholder />
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-left text-wrap">{{ activeCard.content }}</p>
                 </div>
               </div>
               <div
@@ -122,7 +126,8 @@ export default {
   name: "CardDetails",
   data() {
     return {
-      flipped: false
+      flipped: false,
+      editing: false
     };
   },
   computed: {
