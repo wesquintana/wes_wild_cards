@@ -58,6 +58,14 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async editDeck({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("decks/" + payload._id, payload);
+        commit("setResource", { name: "activeDeck", data: res.data });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

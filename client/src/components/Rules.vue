@@ -57,8 +57,8 @@ export default {
       this.editing = !this.editing;
     },
     submitEdits() {
-      this.$store.dispatch("editRules", {
-        id: this.deckData._id,
+      this.$store.dispatch("editDeck", {
+        _id: this.deckData._id,
         rules: this.deckData.rules
       });
       this.editing = !this.editing;
