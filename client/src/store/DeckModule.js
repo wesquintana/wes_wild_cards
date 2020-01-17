@@ -66,6 +66,14 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async removeDeck({ commit, dispatch }, _id) {
+      try {
+        let res = await api.delete("decks/" + _id);
+        // commit("setResource", { name: "activeDeck", data: res.data });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };
