@@ -68,7 +68,7 @@ export default {
     startEditing() {
       this.editing = !this.editing;
     },
-    submitEdits() {
+      submitEdits() {
       this.$store.dispatch("editProfile", {
         id: this.profile._id,
         description: this.profile.description,

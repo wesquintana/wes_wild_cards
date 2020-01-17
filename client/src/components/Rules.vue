@@ -14,14 +14,20 @@
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Rules</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title text-center" id="exampleModalLongTitle">Rules</h5>
+            <button
+              type="button"
+              class="close"
+              v-on:click="editing=true"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <p v-if="editing">{{deckData.rules}}</p>
-            <textarea v-else name id cols="30" rows="10" v-model="deckData.rules"></textarea>
+            <textarea v-else name id cols="auto" rows="10" v-model="deckData.rules"></textarea>
           </div>
           <div class="modal-footer">
             <button
