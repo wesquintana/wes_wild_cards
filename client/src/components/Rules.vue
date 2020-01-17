@@ -26,7 +26,7 @@
             </button>
           </div>
           <div v-if="editing">
-            <div class="modal-body">
+            <div class="modal-body text-left">
               <p>{{deckData.rules}}</p>
             </div>
             <div class="modal-footer">
@@ -40,12 +40,17 @@
           <div v-if="!editing">
             <div class="modal-body">
               <form>
-                <div class="form-group">
-                  <textarea name id cols="auto" rows="10" v-model="deckData.rules"></textarea>
-                </div>
+                <textarea
+                  class="form-control"
+                  name
+                  id
+                  cols="auto"
+                  rows="10"
+                  v-model="deckData.rules"
+                ></textarea>
                 <div class="modal-footer"></div>
 
-                <button class="btn btn-success" @click="submitEdits">Done</button>
+                <button class="btn btn-success mb-3 float-right" @click="submitEdits">Done</button>
               </form>
             </div>
           </div>
