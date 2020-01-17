@@ -57,6 +57,9 @@ export default new Vuex.Store({
     addCard(state, changedDeck) {
       state.activeDeck = changedDeck;
       // Vue.set(state.activeDeck, "cards", [...state.activeDeck.cards, card]);
+    },
+    clearActiveDeck(state) {
+      state.activeDeck = {};
     }
   },
   actions: {
