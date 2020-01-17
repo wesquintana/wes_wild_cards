@@ -70,8 +70,9 @@ export default {
     },
     submitEdits() {
       this.$store.dispatch("editProfile", {
-        id: this.deckData._id,
-        description: this.deckData.rules
+        id: this.profile._id,
+        description: this.profile.description,
+        imgURL: this.profile.imgURL
       });
       this.editing = !this.editing;
     }
