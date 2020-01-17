@@ -7,6 +7,11 @@
           :deckData="activeDeck"
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
         ></edit-deck>
+        <button
+          class="btn btn-danger"
+          v-if="this.$store.state.user._id === this.activeDeck.authorId"
+          @click.prevent="removeDeck"
+        >Delete</button>
       </div>
       <div class="col-6">
         <h2 class="text-center">{{activeDeck.title}}</h2>
@@ -34,6 +39,7 @@
 </template>
 
 <script>
+import notificationService from "../utils/NotificationService.js";
 import cardSticker from "../components/CardSticker";
 import rules from "../components/Rules";
 import newCard from "../components/NewCard";
@@ -53,6 +59,16 @@ export default {
   computed: {
     activeDeck() {
       return this.$store.state.activeDeck;
+    }
+  },
+  methods: {
+    async removeDeck() {
+      if (
+        await notificationService.confirmAction(
+          "Are you sure you want to delete this deck?"
+        )
+      ) {
+      }
     }
   }
 };
