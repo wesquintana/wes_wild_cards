@@ -71,7 +71,7 @@ export default {
           "Are you sure you want to delete this deck?"
         )
       ) {
-        this.$store.dispatch("removeDeck", activeDeck._id);
+        this.$store.dispatch("removeDeck", this.activeDeck._id);
       }
     }
   }

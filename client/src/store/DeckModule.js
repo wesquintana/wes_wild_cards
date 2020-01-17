@@ -60,7 +60,10 @@ export default {
     async removeDeck({ commit, dispatch }, _id) {
       try {
         let res = await api.delete("decks/" + _id);
-        // commit("setResource", { name: "activeDeck", data: res.data });
+        commit("clearActiveDeck");
+        router.push({
+          name: "home"
+        });
       } catch (error) {
         console.error(error);
       }
