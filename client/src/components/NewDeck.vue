@@ -16,7 +16,7 @@
     <!-- modal code -->
     <div
       class="modal fade"
-      data-backdrop
+      data-backdrop="static"
       id="newDeckModal"
       tabindex="-1"
       role="dialog"
@@ -114,6 +114,7 @@ export default {
   },
   methods: {
     addDeck() {
+      $("#newDeckModal").modal("hide");
       let deck = { ...this.newDeck };
       this.$store.dispatch("addDeck", deck);
       this.newDeck.title = "";
