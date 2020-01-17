@@ -19,8 +19,9 @@
       <div class="col-9 border">
         <div class="row">
           <div class="col d-inline-flex mt-3">
-            <h3 class="text-left" v-if="!editing">User Name:&nbsp;</h3>
-            <h3 class="text-left">{{profile.name}}</h3>
+            <h4 class="text-left" v-if="!editing">User Name:&nbsp;</h4>
+            <h3 class="text-left" v-if="editing">{{profile.name}}</h3>
+            <input v-else type="text" v-model="profile.name" />
           </div>
         </div>
         <div class="row">
@@ -68,9 +69,10 @@ export default {
     startEditing() {
       this.editing = !this.editing;
     },
-      submitEdits() {
+    submitEdits() {
       this.$store.dispatch("editProfile", {
         id: this.profile._id,
+        name: this.profile.name,
         description: this.profile.description,
         imgURL: this.profile.imgURL
       });
