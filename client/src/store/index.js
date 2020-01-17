@@ -51,8 +51,9 @@ export default new Vuex.Store({
     addUserDeck(state, payload) {
       state.userDecks.push(payload);
     },
-    addCard(state, card) {
-      state.activeDeck.cards.push(card);
+    addCard(state, changedDeck) {
+      state.activeDeck = changedDeck;
+      // Vue.set(state.activeDeck, "cards", [...state.activeDeck.cards, card]);
     }
   },
   actions: {

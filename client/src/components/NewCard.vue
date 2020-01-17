@@ -2,7 +2,7 @@
   <div class="new-card">
     <div
       class="card"
-      style="width: 10rem; height: 14rem;"
+      style="width: 7.5rem; height: 10.5rem;"
       data-toggle="modal"
       data-target="#newCardModal"
     >
@@ -48,7 +48,7 @@
               <div class="form-group text-left">
                 <label for="newCardCategory">Card Category</label>
                 <input
-                  v-model="newCard.name"
+                  v-model="newCard.category"
                   type="text"
                   class="form-control"
                   id="newCardCategory"
