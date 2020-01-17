@@ -9,43 +9,47 @@
       aria-labelledby="cardDetailsModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
+      <div class="modal-dialog col" role="document">
+        <div class="modal-content row">
+          <div class="modal-header text-center col">
             <h5 class="modal-title" id="activeCardModalLabel">{{ activeCard.name }}</h5>
             <!--TODO create clear Active Card method -->
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-              @click="clearActiveCard"
-            >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="col">
-            <!-- card code -->
-            <div class="card mb-4" style="width: 20rem; height: 28rem;">
-              <div class="card-body justify-content-between">
-                <h5 class="card-title text-wrap">{{ activeCard.name }}</h5>
-                <h5 class="card-title text-wrap">{{ activeCard.category }}</h5>
+          <div class="row">
+            <div class="col">
+              <!-- card code -->
+              <div class="card mb-4" style="width: 20rem; height: 28rem;" v-if="!flipped">
+                <div v-if="flipped">
+                  <div class="card-body d-inline-flex justify-content-between">
+                    <h5 class="card-title text-wrap">{{ activeCard.name }}</h5>
+                    <h5 class="card-title text-wrap">{{ activeCard.category }}</h5>
+                  </div>
+                  <div class="card-body">
+                    <!-- card face image (top half of card) -->
+                    <img :src="activeCard.imgFace" placeholder />
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text text-left text-wrap">{{ activeCard.content }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="card-body">
-                <!-- card face image (top half of card) -->
-                <img :src="activeCard.imgFace" placeholder />
-              </div>
-              <div class="card-body">
-                <p class="card-text text-left text-wrap">{{ activeCard.content }}</p>
-              </div>
+              <div
+                class="card mb-4"
+                style="width: 20rem; height: 28rem;"
+                v-else
+                :style="'background-image: url('+activeCard.imgBack+'); background-size: cover'"
+              ></div>
             </div>
-          </div>
-          <!-- column of buttons -->
-          <div class="col-3">
-            <button>Flip Card</button>
-            <button>Copy Card</button>
-            <button>Edit Card</button>
-            <button>Delete Card</button>
+            <!-- column of buttons -->
+            <div class="col-2">
+              <button @click="flip">Flip Card</button>
+              <button>Copy Card</button>
+              <button>Edit Card</button>
+              <button>Delete Card</button>
+            </div>
           </div>
         </div>
         <!-- form code -->
@@ -113,3 +117,25 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: "CardDetails",
+  data() {
+    return {
+      flipped: false
+    };
+  },
+  computed: {
+    activeCard() {
+      return this.$store.state.activeCard;
+    }
+  },
+  methods: {
+    flip() {
+      this.flipped = !this.flipped;
+    }
+  }
+};
+</script>
+<style scoped>
+</style>

@@ -18,7 +18,12 @@
 export default {
   name: "CardSticker",
   mounted() {},
-  props: ["cardData"]
+  props: ["cardData"],
+  methods: {
+    setActiveCard() {
+      this.$store.dispatch("setActiveCard", this.cardData);
+    }
+  }
 };
 </script>
 
