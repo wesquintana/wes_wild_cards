@@ -35,6 +35,7 @@
         </div>
       </div>
     </div>
+    <card-details></card-details>
   </div>
 </template>
 
@@ -44,6 +45,7 @@ import cardSticker from "../components/CardSticker";
 import rules from "../components/Rules";
 import newCard from "../components/NewCard";
 import editDeck from "../components/EditDeck";
+import cardDetails from "../components/CardDetails";
 
 export default {
   name: "deckDetails",
@@ -51,7 +53,8 @@ export default {
     cardSticker,
     rules,
     newCard,
-    editDeck
+    editDeck,
+    cardDetails
   },
   mounted() {
     this.$store.dispatch("getDeckById", this.$route.params.id);

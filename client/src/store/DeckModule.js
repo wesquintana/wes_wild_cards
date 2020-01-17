@@ -48,17 +48,7 @@ export default {
         console.error(error);
       }
     },
-    async addCard({ commit, dispatch }, payload) {
-      try {
-        let res = await api.post(
-          "decks/" + payload.id + "/cards",
-          payload.data
-        );
-        commit("addCard", res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
+
     async editDeck({ commit, dispatch }, payload) {
       try {
         let res = await api.put("decks/" + payload._id, payload);
