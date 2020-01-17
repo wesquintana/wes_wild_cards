@@ -2,10 +2,11 @@
   <div class="container-fluid deck-details">
     <div class="row">
       <div class="col-3 text-left">
-        <button
+        <edit-deck
+          class="edit-deck"
+          :deckData="activeDeck"
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
-          class="btn btn-primary"
-        >Edit</button>
+        ></edit-deck>
       </div>
       <div class="col-6">
         <h2 class="text-center">{{activeDeck.title}}</h2>
@@ -36,12 +37,15 @@
 import cardSticker from "../components/CardSticker";
 import rules from "../components/Rules";
 import newCard from "../components/NewCard";
+import editDeck from "../components/EditDeck";
+
 export default {
   name: "deckDetails",
   components: {
     cardSticker,
     rules,
-    newCard
+    newCard,
+    editDeck
   },
   mounted() {
     this.$store.dispatch("getDeckById", this.$route.params.id);
