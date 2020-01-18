@@ -24,6 +24,17 @@ export default {
     },
     setActiveCard({ commit, dispatch }, card) {
       commit("setResource", { name: "activeCard", data: card });
+    },
+    async editCard({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put(
+          "decks/" + payload.deckId + "/cards/" + payload.activeCard._id,
+          payload.activeCard
+        );
+        commit("setResource", { name: "activeDeck", data: res.data });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };
