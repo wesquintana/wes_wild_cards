@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark border-bottom">
       <router-link class="navbar-brand" :to="{name:'home'}" href="#">Navbar</router-link>
-      <div class="dropdown">
+      <div class="dropdown profile-name">
         {{activeProfile.name}}
         <button
-          class="btn btn-light"
+          class="btn btn-dark"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -104,6 +104,22 @@ h5 {
 }
 
 p {
+  font-family: "Old Standard TT", serif;
+}
+.navbar {
+  background-image: url("https://www.myfreetextures.com/wp-content/uploads/2014/10/seamless-wood-texture-1.jpg");
+  filter: brightness(1.7);
+  filter: drop-shadow(0px 16px 10px black) !important;
+  border-width: 0.2rem !important;
+  /* border-color: black !important; */
+}
+
+.navbar-brand {
+  color: #f5eaea;
+  background-color: #4d464690;
+}
+.profile-name {
+  color: #f5eaea;
   font-family: "Old Standard TT", serif;
 }
 </style>
