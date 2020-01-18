@@ -6,7 +6,7 @@ let base = window.location.host.includes("localhost:8080")
 
 let api = axios.create({
   baseURL: base + "api/",
-  timeout: 3000,
+  // timeout: 3000,
   withCredentials: true
 });
 export default {
