@@ -94,4 +94,16 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Abril Fatface", cursive;
+}
+
+p {
+  font-family: "Old Standard TT", serif;
+}
 </style>
