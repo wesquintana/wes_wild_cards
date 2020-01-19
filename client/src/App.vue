@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-dark bg-dark border-bottom">
-      <router-link class="navbar-brand" :to="{name:'home'}" href="#">Navbar</router-link>
+      <h2>
+        <router-link class="navbar-brand" :to="{name:'home'}" href="#">Wild Card</router-link>
+      </h2>
       <div class="dropdown profile-name">
         {{activeProfile.name}}
         <button
@@ -14,7 +16,11 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          id="navbar-drop"
+          aria-labelledby="dropdownMenuButton"
+        >
           <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
           <a class="dropdown-item" v-else @click="login">Log In</a>
           <a class="dropdown-item" v-if="!user.hasOwnProperty('email')" @click="register">Register</a>
@@ -95,6 +101,10 @@ export default {
   color: #42b983;
 }
 
+#navbar-drop {
+  background-color: #4d464690;
+}
+
 h1,
 h2,
 h3,
@@ -107,19 +117,22 @@ p {
   font-family: "Old Standard TT", serif;
 }
 .navbar {
-  background-image: url("https://www.myfreetextures.com/wp-content/uploads/2014/10/seamless-wood-texture-1.jpg");
+  background-image: url("./assets/wood_panel.jpg");
   filter: brightness(1.7);
   filter: drop-shadow(0px 16px 10px black) !important;
   border-width: 0.2rem !important;
-  /* border-color: black !important; */
+  border-color: black !important;
 }
 
 .navbar-brand {
   color: #f5eaea;
-  background-color: #4d464690;
 }
 .profile-name {
   color: #f5eaea;
   font-family: "Old Standard TT", serif;
+}
+
+.dropdown-item {
+  color: #f5eaea;
 }
 </style>
