@@ -35,6 +35,14 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async deleteCard({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put("decks/" + payload.deckId + "/cards", payload);
+        commit("deleteCard", payload);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

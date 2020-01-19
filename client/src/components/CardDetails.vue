@@ -66,7 +66,7 @@
                         <button @click="flip">Flip Card</button>
                         <button>Copy Card</button>
                         <button @click="editing = !editing">Edit Card</button>
-                        <button>Delete Card</button>
+                        <button @click="deleteCard" data-dismiss="modal">Delete Card</button>
                       </div>
                     </div>
                   </div>
@@ -167,6 +167,12 @@ export default {
       this.$store.dispatch("editCard", {
         deckId: this.deckId,
         activeCard: this.activeCard
+      });
+    },
+    deleteCard() {
+      this.$store.dispatch("deleteCard", {
+        deckId: this.deckId,
+        cardId: this.activeCard._id
       });
     }
   }
