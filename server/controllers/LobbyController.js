@@ -37,11 +37,7 @@ export default class LobbyController {
 
   async edit(req, res, next) {
     try {
-      let data = await _lobbyService.edit(
-        req.params.id,
-        req.session.uid,
-        req.body
-      );
+      let data = await _lobbyService.edit(req.params.id, req.body);
       return res.send(data);
     } catch (error) {
       next(error);

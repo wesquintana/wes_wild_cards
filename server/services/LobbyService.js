@@ -27,12 +27,10 @@ class LobbyService {
     let lobby = await _repository.findOne({ _id: lobbyId });
     return lobby;
   }
-  async edit(id, uid, update) {
-    let data = await _repository.findOneAndUpdate(
-      { _id: id, userId: uid },
-      update,
-      { new: true }
-    );
+  async edit(id, update) {
+    let data = await _repository.findOneAndUpdate({ _id: id }, update, {
+      new: true
+    });
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this board", 400);
     }
