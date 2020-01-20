@@ -138,7 +138,7 @@ export default class DeckController {
       let data = await _deckService.removeCard({
         deckId: req.params.id,
         userId: req.session.uid,
-        cardId: req.body._id
+        cardId: req.body.cardId
       });
       return res.send("Successfully deleted card");
     } catch (error) {

@@ -36,9 +36,6 @@
                   </div>
                 </div>
 
-                <!-- form code -->
-
-                <!-- end Form code -->
                 <div class="row">
                   <div v-bind:class="{col:!editing, 'col-6':editing}">
                     <div class="modal-body row">
@@ -69,11 +66,12 @@
                         <button @click="flip">Flip Card</button>
                         <button>Copy Card</button>
                         <button @click="editing = !editing">Edit Card</button>
-                        <button>Delete Card</button>
+                        <button @click="deleteCard" data-dismiss="modal">Delete Card</button>
                       </div>
                     </div>
                   </div>
                   <div class="col-6" v-if="editing">
+                    <!-- form code -->
                     <form @submit.prevent="editCard">
                       <div class="form-group text-left">
                         <label for="activeCardName">Card Name</label>
@@ -135,6 +133,7 @@
                         >Save changes!</button>
                       </div>
                     </form>
+                    <!-- end Form code -->
                   </div>
                 </div>
               </div>
@@ -148,6 +147,7 @@
 <script>
 export default {
   name: "CardDetails",
+  props: ["deckId"],
   data() {
     return {
       flipped: false,
@@ -162,6 +162,18 @@ export default {
   methods: {
     flip() {
       this.flipped = !this.flipped;
+    },
+    editCard() {
+      this.$store.dispatch("editCard", {
+        deckId: this.deckId,
+        activeCard: this.activeCard
+      });
+    },
+    deleteCard() {
+      this.$store.dispatch("deleteCard", {
+        deckId: this.deckId,
+        cardId: this.activeCard._id
+      });
     }
   }
 };

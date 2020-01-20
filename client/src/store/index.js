@@ -60,6 +60,13 @@ export default new Vuex.Store({
     },
     clearActiveDeck(state) {
       state.activeDeck = {};
+    },
+    deleteCard(state, payload) {
+      let index = state.activeDeck.cards.findIndex(
+        card => card._id == payload.cardId
+      );
+      state.activeCard = {};
+      state.activeDeck.cards.splice(index, 1);
     }
   },
   actions: {

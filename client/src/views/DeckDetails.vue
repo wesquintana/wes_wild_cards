@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <card-details></card-details>
+    <card-details :deckId="activeDeck._id"></card-details>
   </div>
 </template>
 
