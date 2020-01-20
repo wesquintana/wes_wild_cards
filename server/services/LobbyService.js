@@ -27,6 +27,7 @@ class LobbyService {
     let lobby = await _repository.findOne({ _id: lobbyId });
     return lobby;
   }
+  async moveCard(cardInfo) {}
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
       new: true

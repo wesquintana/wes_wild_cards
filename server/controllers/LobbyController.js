@@ -8,6 +8,7 @@ export default class LobbyController {
       .Router()
       .post("", this.createLobby)
       .get("/:id", this.getById)
+      .put("/:id/cards", this.moveCard)
       .put("/:id", this.edit)
       .use(this.defaultRoute);
   }
@@ -29,6 +30,14 @@ export default class LobbyController {
   async getById(req, res, next) {
     try {
       let data = await _lobbyService.getById(req.params.id);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async moveCard(req, res, next) {
+    try {
+      let data = await _lobbyService.moveCard(req.body);
       return res.send(data);
     } catch (error) {
       next(error);
