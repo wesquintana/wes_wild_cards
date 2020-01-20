@@ -12,13 +12,13 @@ class LobbyService {
   async createLobby(lobbyInfo) {
     // position 0 = deck, position -1 = player1, position -2 = player2
     lobbyInfo.zones = [
-      { position: 0, cards: [...lobbyInfo.deck.cards] },
-      { position: -1, cards: [] },
-      { position: -2, cards: [] }
+      { "0": [...lobbyInfo.deck.cards] },
+      { "-1": [] },
+      { "-2": [] }
     ];
     // pushes "grid" into zones
     for (let i = 1; i <= 18; i++) {
-      lobbyInfo.zones.push({ position: i, cards: [] });
+      lobbyInfo.zones.push({ [`${i}`]: [] });
     }
     let lobby = await _repository.create(lobbyInfo);
     return lobby;
