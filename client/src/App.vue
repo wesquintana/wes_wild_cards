@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-light bg-light">
-      <router-link class="navbar-brand" :to="{name:'home'}" href="#">Navbar</router-link>
-      <div class="dropdown">
+    <nav class="navbar navbar-dark bg-dark">
+      <h2>
+        <router-link class="navbar-brand" :to="{name:'home'}" href="#">Wild Card</router-link>
+      </h2>
+      <div class="dropdown profile-name">
         {{activeProfile.name}}
         <button
-          class="btn btn-light"
+          class="btn btn-dark"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -14,7 +16,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu border dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
           <a class="dropdown-item" v-else @click="login">Log In</a>
           <a class="dropdown-item" v-if="!user.hasOwnProperty('email')" @click="register">Register</a>
@@ -26,6 +28,7 @@
         </div>
       </div>
     </nav>
+    <span class="nav-bottom border"></span>
     <router-view :key="$route.fullPath" />
   </div>
 </template>
@@ -105,5 +108,46 @@ h5 {
 
 p {
   font-family: "Old Standard TT", serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+a.dropdown-item {
+  color: #f5eaea !important;
+}
+
+.dropdown-item:hover {
+  background-color: #4d464690 !important;
+}
+
+.navbar {
+  background-image: url("./assets/wood_panel.jpg");
+}
+
+.navbar-brand {
+  color: #f5eaea;
+}
+.profile-name {
+  color: #f5eaea;
+  font-family: "Old Standard TT", serif;
+}
+
+.dropdown-menu {
+  background-color: #4d464690;
+  border-color: #5b5656 !important;
+  border-width: 0.2rem !important;
+}
+
+.dropdown-item :hover {
+  background-color: #4d464690 !important;
+}
+
+.nav-bottom {
+  display: block;
+  border-width: 0.2rem;
+  border-color: black !important;
+  filter: drop-shadow(0px 20px 20px black) !important;
 }
 </style>
