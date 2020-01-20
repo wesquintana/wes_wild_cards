@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
 import DeckDetails from "../views/DeckDetails";
+import Lobby from "../views/Lobby";
 
 Vue.use(Router);
 
@@ -37,6 +38,7 @@ export default new Router({
     {
       path: "*",
       redirect: "/"
-    }
+    },
+    { path: "/lobby/", name: "Lobby", component: Lobby }
   ]
 });

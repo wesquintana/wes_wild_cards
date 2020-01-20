@@ -12,6 +12,7 @@
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
           @click.prevent="removeDeck"
         >Delete</button>
+        <button class="btn btn-lg btn secondary">@click.prevent"</button>
       </div>
       <div class="col-6">
         <h2 class="text-center">{{activeDeck.title}}</h2>
