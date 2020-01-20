@@ -27,7 +27,16 @@ class LobbyService {
     let lobby = await _repository.findOne({ _id: lobbyId });
     return lobby;
   }
-  async moveCard(cardInfo) {}
+  async delete(id) {
+    let data = await _repository.findOneAndRemove({ _id: id });
+    if (!data) {
+      throw new ApiError("Invalid Id", 400);
+    }
+  }
+  // async moveCard(id, cardInfo) {
+  //   let data= await _repository.findOne({_id: id})
+  //   await _repository.
+  // }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
       new: true
