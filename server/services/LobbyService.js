@@ -11,14 +11,12 @@ class LobbyService {
   }
   async createLobby(lobbyInfo) {
     // position 0 = deck, position -1 = player1, position -2 = player2
-    lobbyInfo.zones = [
-      { position: 0, cards: [...lobbyInfo.deck.cards] },
-      { position: -1, cards: [] },
-      { position: -2, cards: [] }
-    ];
+    lobbyInfo.zones["0"] = [...lobbyInfo.deck.cards];
+    lobbyInfo.zones["-1"] = [];
+    lobbyInfo.zones["-2"] = [];
     // pushes "grid" into zones
     for (let i = 1; i <= 18; i++) {
-      lobbyInfo.zones.push({ position: i, cards: [] });
+      lobbyInfo.zones[`${i}`] = [];
     }
     let lobby = await _repository.create(lobbyInfo);
     return lobby;
@@ -27,7 +25,16 @@ class LobbyService {
     let lobby = await _repository.findOne({ _id: lobbyId });
     return lobby;
   }
-  async moveCard(cardInfo) {}
+  async delete(id) {
+    let data = await _repository.findOneAndRemove({ _id: id });
+    if (!data) {
+      throw new ApiError("Invalid Id", 400);
+    }
+  }
+  // async moveCard(id, cardInfo) {
+  //   let data= await _repository.findOne({_id: id})
+  //   await _repository.
+  // }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
       new: true
