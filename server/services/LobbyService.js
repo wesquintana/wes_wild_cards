@@ -67,6 +67,7 @@ class LobbyService {
     if (!something) {
       throw new ApiError("Invalid ID", 400);
     }
+    // NOTE currently returns the zone that recieves a new card
     return something.zones.find(elem => elem._id == cardInfo.zoneId);
   }
   async edit(id, update) {
