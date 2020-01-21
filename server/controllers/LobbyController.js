@@ -8,7 +8,7 @@ export default class LobbyController {
       .Router()
       .post("", this.createLobby)
       .get("/:id", this.getById)
-      .put("/:id/:zoneId/cards", this.moveCard)
+      .put("/:oldZoneId/cards", this.moveCard)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
@@ -39,8 +39,8 @@ export default class LobbyController {
   async moveCard(req, res, next) {
     try {
       let data = await _lobbyService.moveCard(
-        req.params.id,
-        req.params.zoneId,
+
+        req.params.oldZoneId,
         req.body
       );
       return res.send(data);
