@@ -38,7 +38,7 @@ class LobbyService {
       { $push: { zones: tempSet } },
       { new: true }
     );
-    return lobby;
+    return zoneData;
   }
   async getById(lobbyId) {
     let lobby = await _repository.findOne({ _id: lobbyId });
