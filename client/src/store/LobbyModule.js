@@ -11,5 +11,14 @@ let api = axios.create({
 });
 
 export default {
-  actions: {}
+  actions: {
+    async createLobby({ commit, dispatch }, deckInfo) {
+      try {
+        let res = await api.post("lobby", { deck: deckInfo });
+        commit("addLobby", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 };

@@ -36,7 +36,8 @@ export default new Vuex.Store({
     publicDecks: [],
     activeDeck: {},
     profileDecks: [],
-    activeCard: {}
+    activeCard: {},
+    lobby: []
   },
   mutations: {
     setUser(state, user) {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     addCard(state, changedDeck) {
       state.activeDeck = changedDeck;
       // Vue.set(state.activeDeck, "cards", [...state.activeDeck.cards, card]);
+    },
+    addLobby(state, payload) {
+      state.lobby.push(payload);
     },
     clearActiveDeck(state) {
       state.activeDeck = {};

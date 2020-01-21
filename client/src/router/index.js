@@ -39,6 +39,6 @@ export default new Router({
       path: "*",
       redirect: "/"
     },
-    { path: "/lobby/", name: "Lobby", component: Lobby }
+    { path: "/lobby/:id", name: "lobby", component: Lobby }
   ]
 });
