@@ -54,15 +54,20 @@ class LobbyService {
     let data = await _repository.findOneAndUpdate(
       { "zones": { $elemMatch: { _id: cardInfo.zoneId } } },
       { $push: { "zones.$.cards": cardInfo.cardId } }, { new: true }
+
       // {
       //   arrayFilters: [{ "element": cardInfo.zoneId }],
       //   multi: true
       // }
     );
     if (!data) {
+      throw new ApiError("InvalidId", 400)
+    }
+    let something = await _repository.findOneAndUpdate({ "zones": { $elemMatch: { _id: zoneId } } }, { $pull: { "zones.$.cards": cardInfo.cardId } }, { new: true })
+    if (!something) {
       throw new ApiError("Invalid ID", 400);
     }
-    return data;
+    return something.zones.find(elem => elem._id == cardInfo.zoneId);
   }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
