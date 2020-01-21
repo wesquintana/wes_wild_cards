@@ -6,7 +6,7 @@
           <div class="col-12 public-play">
             <div class="row">
               <div class="col-2 deck-area">
-                <zone :zoneData="lobby.zones"> </zone>
+                <zone :zoneData="lobby"> </zone>
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
