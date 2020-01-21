@@ -1,5 +1,6 @@
 import _lobbyService from "../services/LobbyService";
 import express from "express";
+import socket from "../socket/SocketService"
 
 //PUBLIC
 export default class LobbyController {
@@ -8,7 +9,7 @@ export default class LobbyController {
       .Router()
       .post("", this.createLobby)
       .get("/:id", this.getById)
-      // .put("/:id/cards", this.moveCard)
+      .put("/:oldZoneId/cards", this.moveCard)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
@@ -36,14 +37,19 @@ export default class LobbyController {
       next(error);
     }
   }
-  // async moveCard(req, res, next) {
-  //   try {
-  //     let data = await _lobbyService.moveCard(req.params.id, req.body);
-  //     return res.send(data);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  async moveCard(req, res, next) {
+    try {
+      let data = await _lobbyService.moveCard(
+
+        req.params.oldZoneId,
+        req.body
+      );
+      socket.moveCard({ oldZoneId: req.params.oldZoneId, newZoneId: req.body.newZoneId, cardId: req.body.cardId })
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   async delete(req, res, next) {
     try {
       await _lobbyService.delete(req.params.id);
