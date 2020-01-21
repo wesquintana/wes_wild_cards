@@ -44,7 +44,7 @@ export default class LobbyController {
         req.params.oldZoneId,
         req.body
       );
-      socket.moveCard(data)
+      socket.moveCard({ oldZoneId: req.params.oldZoneId, newZoneId: req.body.newZoneId, cardId: req.body.cardId })
       return res.send(data);
     } catch (error) {
       next(error);
