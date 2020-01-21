@@ -1,5 +1,6 @@
 import _lobbyService from "../services/LobbyService";
 import express from "express";
+import socket from "../socket/SocketService"
 
 //PUBLIC
 export default class LobbyController {
@@ -43,6 +44,7 @@ export default class LobbyController {
         req.params.oldZoneId,
         req.body
       );
+      socket.moveCard(data)
       return res.send(data);
     } catch (error) {
       next(error);
