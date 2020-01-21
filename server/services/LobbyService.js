@@ -54,11 +54,6 @@ class LobbyService {
     let data = await _repository.findOneAndUpdate(
       { "zones": { $elemMatch: { _id: updateInfo.newZoneId } } },
       { $push: { "zones.$.cards": updateInfo.cardId } }, { new: true }
-
-      // {
-      //   arrayFilters: [{ "element": cardInfo.zoneId }],
-      //   multi: true
-      // }
     );
     if (!data) {
       throw new ApiError("InvalidId", 400)
