@@ -6,334 +6,38 @@
           <div class="col-12 public-play">
             <div class="row">
               <div class="col-2 deck-area">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
+                <zone :zoneData="lobby.zones"> </zone>
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <drop
+                    class="col drop"
+                    :class="{ over }"
+                    @dragover="over = true"
+                    @dragleave="over = false"
+                    @drop="handleDrop(data)"
+                  ></drop>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
                 </div>
                 <div class="row card-row">
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
                 </div>
                 <div class="row card-row">
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="card"
-                      draggable
-                      @dragstart="pickupCard()"
-                      style="width: 7.5rem; height: 10.5rem;"
-                    >
-                      <div class="card-body">
-                        <h5 class="card-title mt-2">New Card</h5>
-                        <div
-                          class="d-flex justify-content-center align-items-center"
-                        >
-                          <i class="fas fa-plus" id="add-card"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
+                  <div class="col"></div>
                 </div>
               </div>
             </div>
@@ -343,10 +47,10 @@
             <div class="row scroll-x">
               <!-- plug in spot to create a card -->
               <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
+                <drag
+                  id="testCard"
+                  class="card drag"
+                  :transfer-data="{}"
                   style="width: 7.5rem; height: 10.5rem;"
                 >
                   <div class="card-body">
@@ -357,178 +61,18 @@
                       <i class="fas fa-plus" id="add-card"></i>
                     </div>
                   </div>
-                </div>
+                </drag>
               </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-1">
-                <div
-                  class="card"
-                  draggable
-                  @dragstart="pickupCard()"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
               <!-- plug in all cards in deck -->
               <!--  -->
             </div>
@@ -545,16 +89,38 @@
   </div>
 </template>
 <script>
+import VueDragDrop, { Drag, Drop } from "vue-drag-drop";
 import Zone from "../components/Zone";
+import CardSticker from "../components/CardSticker";
 export default {
   name: "lobby",
   components: {
+    Drag,
+    Drop,
     Zone
   },
+  props: [],
+
   data() {
-    return {};
+    return {
+      over: false,
+      Cards: []
+    };
   },
-  methods: {}
+  mounted() {
+    this.$store.dispatch("getLobbyById", this.$route.params.id);
+  },
+  computed: {
+    lobby() {
+      return this.$store.state.lobby;
+    }
+  },
+  methods: {
+    handleDrop(data) {
+      this.over = false;
+      alert(`this work?`);
+    }
+  }
 };
 </script>
 <style>
@@ -594,5 +160,9 @@ export default {
 }
 .btn {
   margin-top: 1rem;
+}
+.drop {
+  height: 100px;
+  width: 100px;
 }
 </style>

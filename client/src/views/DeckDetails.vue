@@ -11,12 +11,16 @@
           class="btn btn-danger"
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
           @click.prevent="removeDeck"
-        >Delete</button>
-        <button class="btn btn secondary" @click.prevent="createLobby">Start Game</button>
+        >
+          Delete
+        </button>
+        <button class="btn btn secondary" @click.prevent="createLobby">
+          Start Game
+        </button>
       </div>
       <div class="col-6">
-        <h2 class="text-center">{{activeDeck.title}}</h2>
-        <p>{{activeDeck.description}}</p>
+        <h2 class="text-center">{{ activeDeck.title }}</h2>
+        <p>{{ activeDeck.description }}</p>
       </div>
       <div class="col-3">
         <rules class="rules" :deckData="activeDeck">Rules</rules>
