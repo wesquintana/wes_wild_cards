@@ -11,14 +11,33 @@ class LobbyService {
   }
   async createLobby(lobbyInfo) {
     // position 0 = deck, position -1 = player1, position -2 = player2
-    lobbyInfo.zones["0"] = [...lobbyInfo.deck.cards];
-    lobbyInfo.zones["-1"] = [];
-    lobbyInfo.zones["-2"] = [];
+    // lobbyInfo.zones["0"].populate(lobbyInfo.deck.cards.id);
+    // lobbyInfo.zones;
+    // lobbyInfo.zones["-2"] = [];
     // pushes "grid" into zones
-    for (let i = 1; i <= 18; i++) {
-      lobbyInfo.zones[`${i}`] = [];
-    }
+    // for (let i = 1; i <= 18; i++) {
+    //   lobbyInfo.zones[`${i}`] = [];
+    // }
     let lobby = await _repository.create(lobbyInfo);
+    // creates zones for player hands
+    let tempSet = [{ position: "-2" }, { position: "-1" }];
+    // pushes all card Id's into deck zone
+    let cardIds = [];
+    for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
+      cardIds.push(lobbyInfo.deck.cards[i]._id);
+    }
+    // pushes player hands and deck zone into tempSet
+    tempSet.push({ position: "0", cards: cardIds });
+    // pushes remaining zones into tempSet
+    for (let i = 1; i <= 18; i++) {
+      tempSet.push({ position: `${i}` });
+    }
+    // update lobby's zones by $pushing tempSet into lobby's zones
+    let zoneData = await _repository.findOneAndUpdate(
+      { _id: lobby._id },
+      { $push: { zones: tempSet } },
+      { new: true }
+    );
     return lobby;
   }
   async getById(lobbyId) {
