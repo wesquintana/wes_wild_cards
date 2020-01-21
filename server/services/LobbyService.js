@@ -38,7 +38,7 @@ class LobbyService {
       { $push: { zones: tempSet } },
       { new: true }
     );
-    return lobby;
+    return zoneData;
   }
   async getById(lobbyId) {
     let lobby = await _repository.findOne({ _id: lobbyId });
@@ -50,10 +50,21 @@ class LobbyService {
       throw new ApiError("Invalid Id", 400);
     }
   }
-  // async moveCard(id, cardInfo) {
-  //   let data= await _repository.findOne({_id: id})
-  //   await _repository.
-  // }
+  async moveCard(oldZoneId, updateInfo) {
+    let data = await _repository.findOneAndUpdate(
+      { "zones": { $elemMatch: { _id: updateInfo.newZoneId } } },
+      { $push: { "zones.$.cards": updateInfo.cardId } }, { new: true }
+    );
+    if (!data) {
+      throw new ApiError("InvalidId", 400)
+    }
+    let something = await _repository.findOneAndUpdate({ "zones": { $elemMatch: { _id: oldZoneId } } }, { $pull: { "zones.$.cards": updateInfo.cardId } }, { new: true })
+    if (!something) {
+      throw new ApiError("Invalid ID", 400);
+    }
+    // NOTE currently returns the zone that recieves a new card
+    return something.zones.find(elem => elem._id == updateInfo.newZoneId);
+  }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
       new: true
