@@ -6,6 +6,7 @@ import AuthService from "../AuthService";
 import profileModule from "./ProfileModule";
 import deckModule from "./DeckModule";
 import cardModule from "./CardModule";
+import lobbyModule from "./LobbyModule";
 
 Vue.use(Vuex);
 
@@ -24,7 +25,8 @@ export default new Vuex.Store({
   modules: {
     profileModule,
     deckModule,
-    cardModule
+    cardModule,
+    lobbyModule
   },
   state: {
     user: {},
@@ -34,7 +36,8 @@ export default new Vuex.Store({
     publicDecks: [],
     activeDeck: {},
     profileDecks: [],
-    activeCard: {}
+    activeCard: {},
+    lobby: []
   },
   mutations: {
     setUser(state, user) {
@@ -58,6 +61,9 @@ export default new Vuex.Store({
       state.activeDeck = changedDeck;
       // Vue.set(state.activeDeck, "cards", [...state.activeDeck.cards, card]);
     },
+    addLobby(state, payload) {
+      state.lobby.push(payload);
+    },
     clearActiveDeck(state) {
       state.activeDeck = {};
     },
@@ -67,6 +73,10 @@ export default new Vuex.Store({
       );
       state.activeCard = {};
       state.activeDeck.cards.splice(index, 1);
+    },
+    moveCard(state, { fromZone, toZone, cardIndex }) {
+      let cardToMove = fromZone.splice(cardIndex, 1)[0];
+      toZone.push(cardToMove);
     }
   },
   actions: {
