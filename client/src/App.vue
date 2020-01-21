@@ -83,6 +83,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url("./assets/felt.jpg");
+  background-size: 250px;
+  background-repeat: repeat;
+  height: -webkit-fill-available;
 }
 
 #nav {
