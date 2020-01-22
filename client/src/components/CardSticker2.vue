@@ -9,6 +9,12 @@
       style="width: 7.5rem; height: 10.5rem;"
     >
       <div class="card-body">
+        <img
+          :src="card.imgFace"
+          alt=""
+          style="max-height: 4rem; max-width: 4.7rem;"
+        />
+
         <h5 class="card-title text-wrap">{{ card.name }}</h5>
         <!-- <p class="card-text text-left text-wrap">
           {{ lobby.deck.cards.content }}
