@@ -1,7 +1,7 @@
 <template>
   <div class="deck-sticker">
     <router-link :to="{name: 'deckDetails', params: { id: deckData._id} }">
-      <div class="card mb-4" style="width: 10rem; height: 14rem;">
+      <div class="card" style="width: 20vh; height: 28vh;">
         <div class="card-body">
           <h5 class="card-title text-wrap">{{ deckData.title }}</h5>
           <p class="card-text text-left text-wrap">{{ deckData.description }}</p>
