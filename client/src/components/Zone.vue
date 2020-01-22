@@ -1,6 +1,6 @@
 <template>
   <div v-if="zoneData" class="Zone">
-    <div class="card" style="width: 8rem; height: 11.2rem;">
+    <div class="card fake-card" style="width: 8rem; height: 11.2rem;">
       <div
         v-if="activeCard._id"
         class="drop-zone"
@@ -68,5 +68,12 @@ export default {
 }
 .Zone {
   position: relative;
+}
+.fake-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  border: 2px solid black;
 }
 </style>
