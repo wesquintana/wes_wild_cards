@@ -5,11 +5,13 @@ import DbContext from "./db/dbconfig";
 import Socket from "./socket/SocketService";
 
 const server = express();
+// sets up socketServer, io
 const socketServer = require("http").createServer(server);
 const io = require("socket.io")(socketServer);
 
 //Fire up database connection
 DbContext.connect();
+// fires up socket connection
 Socket.setIO(io);
 
 //Sets the port to Heroku's, and the files to the built project
@@ -60,6 +62,7 @@ server.use("*", (req, res, next) => {
   });
 });
 
+// listens to socketServer
 socketServer.listen(port, () => {
   console.log("socketServer running on port", port);
 });

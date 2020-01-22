@@ -32,6 +32,7 @@ export default {
           "lobby/" + zoneChange.oldZoneId + "/cards",
           zoneChange
         );
+        // sends dispatch to emitCard in SocketModule
         dispatch("emitCard", { data: res.data });
         commit("moveCard", { data: res.data });
       } catch (error) {

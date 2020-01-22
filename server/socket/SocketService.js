@@ -12,6 +12,7 @@ class Socket {
       socket: socket.id,
       message: "Successfully Connected"
     });
+    // passes data to notifyMoveCard after receiving signal from emetCard on client
     socket.on("emitCard", data => {
       this.notifyMoveCard(data);
     });
