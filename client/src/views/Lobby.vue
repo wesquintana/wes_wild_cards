@@ -10,42 +10,20 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
+                  <zone
+                    v-for="zone in zones"
+                    :key="zone.position"
+                    :zoneData="zone"
+                    class="col-2"
+                  ></zone>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="col-12 hand-area">
-            <div class="row scroll-x">
-              <!-- plug in spot to create a card -->
-              <div class="col-1">
-                <drag
-                  id="testCard"
-                  class="card drag"
-                  :transfer-data="{}"
-                  style="width: 7.5rem; height: 10.5rem;"
-                >
-                  <div class="card-body">
-                    <h5 class="card-title mt-2">New Card</h5>
-                    <div class="d-flex justify-content-center align-items-center">
-                      <i class="fas fa-plus" id="add-card"></i>
-                    </div>
-                  </div>
-                </drag>
-              </div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <div class="col-1"></div>
-              <!-- plug in all cards in deck -->
-              <!--  -->
+            <div class="row ">
+              <player-hand :handData="playerOneHand"></player-hand>
             </div>
           </div>
         </div>
@@ -63,12 +41,14 @@
 import VueDragDrop, { Drag, Drop } from "vue-drag-drop";
 import Zone from "../components/Zone";
 import CardSticker from "../components/CardSticker";
+import PlayerHand from "../components/PlayerHand";
 export default {
   name: "lobby",
   components: {
     Drag,
     Drop,
-    Zone
+    Zone,
+    PlayerHand
   },
   props: [],
 
@@ -92,6 +72,9 @@ export default {
     },
     zones() {
       return this.lobby.zones.slice(3);
+    },
+    playerOneHand() {
+      return this.lobby.zones[1];
     }
   },
   methods: {
