@@ -86,10 +86,6 @@ export default {
   font-size: 6rem;
 }
 
-.home {
-  background-image: url("../assets/felt.jpg");
-  background-size: 250px;
-}
 /* Styles deck headers, overrides some Bootstrap styling */
 .deck-header {
   background-color: #4d464690;

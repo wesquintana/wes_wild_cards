@@ -2,7 +2,7 @@
   <div class="new-deck">
     <div
       class="card"
-      style="width: 10rem; height: 14rem;"
+      style="width: 20vh; height: 28vh;"
       data-toggle="modal"
       data-target="#newDeckModal"
     >
