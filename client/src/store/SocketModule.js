@@ -4,7 +4,7 @@ let socket = {};
 
 export default {
   actions: {
-    initalizeSocket({ commit, dispatch }) {
+    initializeSocket({ commit, dispatch }) {
       //establish connection with socket
       socket = io("//localhost:3000");
       //Handle any on connection events
@@ -14,8 +14,13 @@ export default {
 
       // register all listeners
       socket.on("moveCard", data => {
+        console.log("socketClient", data);
         commit("moveCard", data);
       });
+    },
+
+    emitCard({ commit, dispatch }, data) {
+      socket.emit("emitCard", data);
     }
   }
 };

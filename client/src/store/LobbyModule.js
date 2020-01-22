@@ -32,6 +32,7 @@ export default {
           "lobby/" + zoneChange.oldZoneId + "/cards",
           zoneChange
         );
+        dispatch("emitCard", { data: res.data });
         commit("moveCard", { data: res.data });
       } catch (error) {
         console.error(error);

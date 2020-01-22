@@ -7,7 +7,7 @@
         @click="moveCard"
         dropzone="zone"
         @dragover.prevent
-        @drop="moveCard"
+        @drop.prevent="moveCard"
       ></div>
       <card-sticker-two :cardId="zoneData.cards[0]"></card-sticker-two>
     </div>
