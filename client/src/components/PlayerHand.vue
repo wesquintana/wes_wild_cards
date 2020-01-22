@@ -1,6 +1,6 @@
 <template>
   <div class="player-hand">
-    <div class=" scroll-x">
+    <div class="scroll-x">
       <div class="d-flex flex-direction-row" style="width: 100%; height: 100%;">
         <div
           v-if="activeCard._id"
@@ -15,8 +15,7 @@
           v-for="(card, index) in handData.cards"
           :key="card._id"
           :cardId="handData.cards[index]"
-        >
-        </card-sticker-two>
+        ></card-sticker-two>
       </div>
     </div>
   </div>
@@ -60,7 +59,7 @@ export default {
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
-  max-width: 81.5vw;
+  width: 81.5vw;
 }
 
 .scroll-x::-webkit-scrollbar {

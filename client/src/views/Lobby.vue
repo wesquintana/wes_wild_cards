@@ -10,19 +10,14 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone
-                    v-for="zone in zones"
-                    :key="zone.position"
-                    :zoneData="zone"
-                    class="col-2"
-                  ></zone>
+                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="col-12 hand-area">
-            <div class="row ">
+            <div class="row">
               <player-hand :handData="playerOneHand"></player-hand>
             </div>
           </div>
@@ -30,8 +25,11 @@
       </div>
       <div class="col-2 play-menu">
         <button class="btn btn-danger btn-lg">Leave Game</button>
-        <button class="btn btn-primary btn-lg">Rules</button>
-        <button class="btn btn-success btn-lg">Edit Card</button>
+        <rules class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
+        <button class="btn btn-success btn-lg">
+          Reset Game
+          <!-- NOTE Does Nothing -->
+        </button>
         <button class="btn btn-warning btn-lg">Users</button>
       </div>
     </div>
@@ -42,13 +40,15 @@ import VueDragDrop, { Drag, Drop } from "vue-drag-drop";
 import Zone from "../components/Zone";
 import CardSticker from "../components/CardSticker";
 import PlayerHand from "../components/PlayerHand";
+import Rules from "../components/Rules";
 export default {
   name: "lobby",
   components: {
     Drag,
     Drop,
     Zone,
-    PlayerHand
+    PlayerHand,
+    Rules
   },
   props: [],
 
@@ -75,6 +75,10 @@ export default {
     },
     playerOneHand() {
       return this.lobby.zones[1];
+    },
+    deck() {
+      console.log(this.$store.state.lobby.deck);
+      return this.$store.state.lobby.deck;
     }
   },
   methods: {
