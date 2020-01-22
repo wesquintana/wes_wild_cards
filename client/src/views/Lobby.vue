@@ -10,7 +10,12 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
+                  <zone
+                    v-for="zone in zones"
+                    :key="zone.position"
+                    :zoneData="zone"
+                    class="col-2"
+                  ></zone>
                 </div>
               </div>
             </div>
@@ -18,7 +23,7 @@
 
           <div class="col-12 hand-area">
             <div class="row">
-              <player-hand :handData="playerOneHand"></player-hand>
+              <player-hand :zoneData="playerOneHand"></player-hand>
             </div>
           </div>
         </div>
@@ -63,8 +68,6 @@ export default {
   },
   computed: {
     lobby() {
-      console.log(this.$store.state.lobby);
-
       return this.$store.state.lobby;
     },
     drawPile() {
@@ -77,8 +80,7 @@ export default {
       return this.lobby.zones[1];
     },
     deck() {
-      console.log(this.$store.state.lobby.deck);
-      return this.$store.state.lobby.deck;
+      return this.lobby.deck;
     }
   },
   methods: {
