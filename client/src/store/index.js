@@ -80,7 +80,7 @@ export default new Vuex.Store({
       let oldZoneIndex = state.lobby.zones.findIndex(
         oz => oz._id == payload.data.oldZoneId
       );
-      let cardIndex = state.lobby.zones[oldZoneIndex].findIndex(
+      let cardIndex = state.lobby.zones[oldZoneIndex].cards.findIndex(
         card => card._id == payload.data.cardId
       );
       state.lobby.zones[oldZoneIndex].cards.splice(cardIndex, 1);

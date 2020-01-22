@@ -8,13 +8,13 @@
           @click="moveCard"
           dropzone="zone"
           @dragover.prevent
-          @drop="moveCard"
+          @drop.prevent="moveCard"
         ></div>
         <card-sticker-two
           class="col-2"
-          v-for="(card, index) in handData.cards"
+          v-for="(card, index) in zoneData.cards"
           :key="card._id"
-          :cardId="handData.cards[index]"
+          :cardId="zoneData.cards[index]"
         ></card-sticker-two>
       </div>
     </div>
@@ -30,20 +30,27 @@ export default {
   components: {
     CardStickerTwo
   },
-  props: ["handData"],
+  props: ["zoneData"],
   methods: {
     moveCard() {
       let card = this.$store.state.activeCard;
       if (card._id) {
         this.$store.dispatch("setActiveCard", {});
+        let oldZone = {};
         this.$store.state.lobby.zones.forEach(z => {
           let found = z.cards.findIndex(c => c == card._id);
           if (found != -1) {
             z.cards.splice(found, 1);
+            oldZone = z;
           }
         });
-        this.handData.cards.unshift(card._id);
-        this.$store.dispatch("saveLobby", this.$store.state.lobby);
+        this.zoneData.cards.unshift(card._id);
+        let zoneChange = {
+          oldZoneId: oldZone._id,
+          newZoneId: this.zoneData._id,
+          cardId: card._id
+        };
+        this.$store.dispatch("moveCard", zoneChange);
       }
     }
   },
