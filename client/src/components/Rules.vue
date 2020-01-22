@@ -14,7 +14,7 @@
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLongTitle">Rules</h5>
+            <h5 class="modal-title text-center rules-desc" id="exampleModalLongTitle">Rules</h5>
             <button
               type="button"
               class="close"
@@ -27,12 +27,12 @@
           </div>
           <div v-if="editing">
             <div class="modal-body text-left">
-              <p>{{deckData.rules}}</p>
+              <p class="rules-desc">{{deckData.rules}}</p>
             </div>
             <div class="modal-footer">
               <button
                 class="btn btn-primary"
-                v-if=" this.$store.state.user._id === this.deckData.authorId"
+                v-if=" (this.$store.state.user._id === this.deckData.authorId)&&this.$route.name!='lobby'"
                 @click="startEditing"
               >Edit</button>
             </div>
@@ -85,4 +85,7 @@ export default {
 </script>
 
 <style>
+.rules-desc {
+  color: black;
+}
 </style>
