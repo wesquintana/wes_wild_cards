@@ -41,6 +41,7 @@ export default {
           }
         });
         this.zoneData.cards.unshift(card._id);
+        // TODO change function from saveLobby to moveCard
         this.$store.dispatch("saveLobby", this.$store.state.lobby);
       }
     }
