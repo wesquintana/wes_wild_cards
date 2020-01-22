@@ -1,6 +1,6 @@
 import axios from "axios";
 import router from "../router";
-let base = window.location.host.includes("localhost:8080")
+let base = window.location.host.includes("localhost:")
   ? "//localhost:3000/"
   : "/";
 
@@ -15,7 +15,29 @@ export default {
     async createLobby({ commit, dispatch }, deckInfo) {
       try {
         let res = await api.post("lobby", { deck: deckInfo });
-        commit("addLobby", res.data);
+        commit("setResource", { name: "lobby", data: res.data });
+        router.push({
+          name: "lobby",
+          params: { id: res.data._id }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async saveLobby({ commit, dispatch }, lobby) {
+      try {
+        let res = await api.put("lobby/" + lobby._id, lobby)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async getLobbyById({ commit, dispatch }, lobbyId) {
+      try {
+        let res = await api.get("lobby/" + lobbyId);
+
+        commit("setResource", { name: "lobby", data: res.data });
       } catch (error) {
         console.error(error);
       }

@@ -11,7 +11,7 @@ import lobbyModule from "./LobbyModule";
 Vue.use(Vuex);
 
 //Allows axios to work locally or live
-let base = window.location.host.includes("localhost:8080")
+let base = window.location.host.includes("localhost:")
   ? "//localhost:3000/"
   : "/";
 
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     activeDeck: {},
     profileDecks: [],
     activeCard: {},
-    lobby: []
+    lobby: { zones: [], cards: [] }
   },
   mutations: {
     setUser(state, user) {
@@ -61,9 +61,9 @@ export default new Vuex.Store({
       state.activeDeck = changedDeck;
       // Vue.set(state.activeDeck, "cards", [...state.activeDeck.cards, card]);
     },
-    addLobby(state, payload) {
-      state.lobby.push(payload);
-    },
+    // addLobby(state, payload) {
+    //   state.lobby.push(payload);
+    // },
     clearActiveDeck(state) {
       state.activeDeck = {};
     },
