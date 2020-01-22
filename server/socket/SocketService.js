@@ -18,6 +18,7 @@ class Socket {
     });
   }
 
+  // runs when called by socket.on
   notifyMoveCard(data) {
     this.io.emit("moveCard", data);
   }

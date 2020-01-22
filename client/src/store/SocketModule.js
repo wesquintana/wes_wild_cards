@@ -12,7 +12,8 @@ export default {
         console.log("Connected to socket");
       });
 
-      // register all listeners
+      // register all listeners\
+      // NOTE do we need this?
       socket.on("moveCard", data => {
         commit("moveCard", data);
       });
