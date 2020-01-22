@@ -34,6 +34,9 @@ export default {
       let card = this.$store.state.activeCard;
       if (card._id) {
         this.$store.dispatch("setActiveCard", {});
+        let oldZoneId = this.$store.state.lobby.zones.find(
+          oZ => oZ.cards._id == card._id
+        );
         this.$store.state.lobby.zones.forEach(z => {
           let found = z.cards.findIndex(c => c == card._id);
           if (found != -1) {
@@ -41,8 +44,14 @@ export default {
           }
         });
         this.zoneData.cards.unshift(card._id);
+        let zoneChange = {
+          oldZoneId: oldZoneId,
+          newZoneId: zoneData._id,
+          cardId: card._id
+        };
         // TODO change function from saveLobby to moveCard
-        this.$store.dispatch("saveLobby", this.$store.state.lobby);
+
+        this.$store.dispatch("moveCard", zoneChange);
       }
     }
   }

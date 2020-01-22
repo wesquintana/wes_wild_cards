@@ -68,7 +68,7 @@ class LobbyService {
       throw new ApiError("Invalid ID", 400);
     }
     // NOTE currently returns the zone that recieves a new card
-    return { newZone, oldZone };
+    return updateInfo;
   }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {

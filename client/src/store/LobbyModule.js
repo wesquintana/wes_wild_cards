@@ -26,9 +26,13 @@ export default {
     },
 
     // Replace saveLobby with moveCard, commit changes to zones to store
-    async saveLobby({ commit, dispatch }, lobby) {
+    async moveCard({ commit, dispatch }, zoneChange) {
       try {
-        let res = await api.put("lobby/" + lobby._id, lobby);
+        let res = await api.put(
+          "lobby/" + zoneChange.oldZoneId + "/cards",
+          zoneChange
+        );
+        commit("moveCard", { data: res.data });
       } catch (error) {
         console.error(error);
       }
