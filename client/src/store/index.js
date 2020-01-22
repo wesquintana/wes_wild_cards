@@ -76,9 +76,18 @@ export default new Vuex.Store({
       state.activeCard = {};
       state.activeDeck.cards.splice(index, 1);
     },
-    moveCard(state, { fromZone, toZone, cardIndex }) {
-      let cardToMove = fromZone.splice(cardIndex, 1)[0];
-      toZone.push(cardToMove);
+    moveCard(state, payload) {
+      let oldZoneIndex = state.lobby.zones.findIndex(
+        oz => oz._id == payload.data.oldZoneId
+      );
+      let cardIndex = state.lobby.zones[oldZoneIndex].findIndex(
+        card => card._id == payload.data.cardId
+      );
+      state.lobby.zones[oldZoneIndex].cards.splice(cardIndex, 1);
+      let newZoneIndex = state.lobby.zones.findIndex(
+        nz => nz._id == payload.data.newZoneId
+      );
+      state.lobby.zones[newZoneIndex].cards.unshift(payload.data.cardId);
     }
   },
   actions: {
