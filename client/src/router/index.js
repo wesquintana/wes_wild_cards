@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+
 import Profile from "../views/Profile.vue";
 import DeckDetails from "../views/DeckDetails";
 import Lobby from "../views/Lobby";
@@ -20,11 +20,7 @@ export default new Router({
     //   name: "deck",
     //   component: Deck
     // },
-    {
-      path: "/login",
-      name: "login",
-      component: Login
-    },
+
     {
       path: "/profile/:profileId",
       name: "profile",
