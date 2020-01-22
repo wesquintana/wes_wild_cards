@@ -25,6 +25,14 @@ export default {
       }
     },
 
+    async saveLobby({ commit, dispatch }, lobby) {
+      try {
+        let res = await api.put("lobby/" + lobby._id, lobby)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
     async getLobbyById({ commit, dispatch }, lobbyId) {
       try {
         let res = await api.get("lobby/" + lobbyId);

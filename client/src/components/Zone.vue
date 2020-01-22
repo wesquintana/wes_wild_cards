@@ -41,6 +41,7 @@ export default {
           }
         });
         this.zoneData.cards.unshift(card._id);
+        this.$store.dispatch("saveLobby", this.$store.state.lobby);
       }
     }
   }

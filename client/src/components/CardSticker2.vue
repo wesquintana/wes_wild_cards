@@ -2,6 +2,7 @@
   <div class="card-sticker-two" v-if="cardId">
     <div
       class="card"
+      @click="setActiveCard"
       @drag="setActiveCard"
       draggable="true"
       :class="{ active: activeCard == card }"
