@@ -1,11 +1,8 @@
 <template>
-  <div class="Zone">
+  <div v-if="zoneData" class="Zone">
     <div class="card" style="width: 8rem; height: 11.2rem;">
-      <card-sticker-two
-        v-for="card in zoneData.zones[2].cards"
-        :key="card"
-        :cardData="card"
-      ></card-sticker-two>
+      <div v-if="activeCard._id" class="drop-zone" @click="moveCard"></div>
+      <card-sticker-two :cardId="zoneData.cards[0]"></card-sticker-two>
     </div>
   </div>
 </template>
@@ -20,7 +17,38 @@ export default {
   components: {
     CardStickerTwo
   },
-  methods: {}
+  computed: {
+    activeCard() {
+      return this.$store.state.activeCard;
+    }
+  },
+  methods: {
+    moveCard() {
+      let card = this.$store.state.activeCard;
+      if (card._id) {
+        this.$store.dispatch("setActiveCard", {});
+        this.$store.state.lobby.zones.forEach(z => {
+          let found = z.cards.findIndex(c => c == card._id);
+          if (found != -1) {
+            z.cards.splice(found, 1);
+          }
+        });
+        this.zoneData.cards.unshift(card._id);
+      }
+    }
+  }
 };
 </script>
-<style></style>
+<style>
+.drop-zone {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.3);
+}
+.Zone {
+  position: relative;
+}
+</style>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import router from "../router";
-let base = window.location.host.includes("localhost:8080")
+let base = window.location.host.includes("localhost:")
   ? "//localhost:3000/"
   : "/";
 

@@ -6,16 +6,11 @@
           <div class="col-12 public-play">
             <div class="row">
               <div class="col-2 deck-area">
-                <zone :zoneData="lobby"> </zone>
+                <zone :zoneData="drawPile"></zone>
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone
-                    v-for="zone in zones"
-                    :key="zone.position"
-                    class="col-2"
-                    >{{ zone }}</zone
-                  >
+                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
                 </div>
               </div>
             </div>
@@ -33,9 +28,7 @@
                 >
                   <div class="card-body">
                     <h5 class="card-title mt-2">New Card</h5>
-                    <div
-                      class="d-flex justify-content-center align-items-center"
-                    >
+                    <div class="d-flex justify-content-center align-items-center">
                       <i class="fas fa-plus" id="add-card"></i>
                     </div>
                   </div>
@@ -93,6 +86,12 @@ export default {
       console.log(this.$store.state.lobby);
 
       return this.$store.state.lobby;
+    },
+    drawPile() {
+      return this.lobby.zones[2];
+    },
+    zones() {
+      return this.lobby.zones.slice(3);
     }
   },
   methods: {

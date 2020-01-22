@@ -1,16 +1,15 @@
 <template>
-  <div
-    class="card-sticker-two"
-    data-toggle="modal"
-    data-target="#cardDetailsModal"
-    @click="setActiveCard"
-  >
-    <div class="card" style="width: 7.5rem; height: 10.5rem;">
+  <div class="card-sticker-two" @click="setActiveCard" v-if="cardId">
+    <div
+      class="card"
+      :class="{ active: activeCard == card }"
+      style="width: 7.5rem; height: 10.5rem;"
+    >
       <div class="card-body">
-        <h5 class="card-title text-wrap">{{ cardData }}</h5>
+        <h5 class="card-title text-wrap">{{ card.name }}</h5>
         <!-- <p class="card-text text-left text-wrap">
           {{ lobby.deck.cards.content }}
-        </p> -->
+        </p>-->
       </div>
     </div>
   </div>
@@ -20,13 +19,25 @@
 export default {
   name: "CardStickerTwo",
   mounted() {},
-  props: ["cardData"],
+  props: ["cardId"],
   methods: {
     setActiveCard() {
-      this.$store.dispatch("setActiveCard", this.cardData);
+      this.$store.dispatch("setActiveCard", this.card);
+    }
+  },
+  computed: {
+    card() {
+      return this.$store.state.lobby.deck.cards.find(c => c._id == this.cardId);
+    },
+    activeCard() {
+      return this.$store.state.activeCard;
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+.active {
+  border: 3px solid red;
+}
+</style>
