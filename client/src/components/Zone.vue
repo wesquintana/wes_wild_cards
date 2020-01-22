@@ -2,7 +2,7 @@
   <div class="Zone">
     <div class="card" style="width: 8rem; height: 11.2rem;">
       <card-sticker-two
-        :v-for="card in zoneData.zones[2].cards"
+        v-for="card in zoneData.zones[2].cards"
         :key="card"
         :cardData="card"
       ></card-sticker-two>

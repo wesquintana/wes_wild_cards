@@ -7,10 +7,10 @@
   >
     <div class="card" style="width: 7.5rem; height: 10.5rem;">
       <div class="card-body">
-        <h5 class="card-title text-wrap">{{ lobby.deck.cards.name }}</h5>
-        <p class="card-text text-left text-wrap">
+        <h5 class="card-title text-wrap">{{ cardData }}</h5>
+        <!-- <p class="card-text text-left text-wrap">
           {{ lobby.deck.cards.content }}
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
 export default {
   name: "CardStickerTwo",
   mounted() {},
-  props: ["lobby"],
+  props: ["cardData"],
   methods: {
     setActiveCard() {
       this.$store.dispatch("setActiveCard", this.cardData);

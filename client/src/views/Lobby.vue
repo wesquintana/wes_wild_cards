@@ -10,34 +10,12 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <drop
-                    class="col drop"
-                    :class="{ over }"
-                    @dragover="over = true"
-                    @dragleave="over = false"
-                    @drop="handleDrop(data)"
-                  ></drop>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                </div>
-                <div class="row card-row">
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                </div>
-                <div class="row card-row">
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
-                  <div class="col"></div>
+                  <zone
+                    v-for="zone in zones"
+                    :key="zone.position"
+                    class="col-2"
+                    >{{ zone }}</zone
+                  >
                 </div>
               </div>
             </div>
@@ -112,6 +90,8 @@ export default {
   },
   computed: {
     lobby() {
+      console.log(this.$store.state.lobby);
+
       return this.$store.state.lobby;
     }
   },
