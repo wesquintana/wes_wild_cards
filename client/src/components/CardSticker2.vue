@@ -1,7 +1,9 @@
 <template>
-  <div class="card-sticker-two" @click="setActiveCard" v-if="cardId">
+  <div class="card-sticker-two" v-if="cardId">
     <div
       class="card"
+      @drag="setActiveCard"
+      draggable="true"
       :class="{ active: activeCard == card }"
       style="width: 7.5rem; height: 10.5rem;"
     >
@@ -37,6 +39,10 @@ export default {
 </script>
 
 <style>
+.card-sticker-two {
+  user-select: none;
+}
+
 .active {
   border: 3px solid red;
 }
