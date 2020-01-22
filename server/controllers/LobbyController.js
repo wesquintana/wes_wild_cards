@@ -1,6 +1,6 @@
 import _lobbyService from "../services/LobbyService";
 import express from "express";
-import socket from "../socket/SocketService"
+import socket from "../socket/SocketService";
 
 //PUBLIC
 export default class LobbyController {
@@ -39,12 +39,8 @@ export default class LobbyController {
   }
   async moveCard(req, res, next) {
     try {
-      let data = await _lobbyService.moveCard(
-
-        req.params.oldZoneId,
-        req.body
-      );
-      socket.moveCard({ oldZoneId: req.params.oldZoneId, newZoneId: req.body.newZoneId, cardId: req.body.cardId })
+      let data = await _lobbyService.moveCard(req.params.oldZoneId, req.body);
+      socket.moveCard(data);
       return res.send(data);
     } catch (error) {
       next(error);

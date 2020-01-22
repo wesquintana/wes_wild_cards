@@ -51,19 +51,24 @@ class LobbyService {
     }
   }
   async moveCard(oldZoneId, updateInfo) {
-    let data = await _repository.findOneAndUpdate(
-      { "zones": { $elemMatch: { _id: updateInfo.newZoneId } } },
-      { $push: { "zones.$.cards": updateInfo.cardId } }, { new: true }
+    let newZone = await _repository.findOneAndUpdate(
+      { zones: { $elemMatch: { _id: updateInfo.newZoneId } } },
+      { $push: { "zones.$.cards": updateInfo.cardId } },
+      { new: true }
     );
-    if (!data) {
-      throw new ApiError("InvalidId", 400)
+    if (!newZone) {
+      throw new ApiError("InvalidId", 400);
     }
-    let something = await _repository.findOneAndUpdate({ "zones": { $elemMatch: { _id: oldZoneId } } }, { $pull: { "zones.$.cards": updateInfo.cardId } }, { new: true })
-    if (!something) {
+    let oldZone = await _repository.findOneAndUpdate(
+      { zones: { $elemMatch: { _id: oldZoneId } } },
+      { $pull: { "zones.$.cards": updateInfo.cardId } },
+      { new: true }
+    );
+    if (!oldZone) {
       throw new ApiError("Invalid ID", 400);
     }
     // NOTE currently returns the zone that recieves a new card
-    return something.zones.find(elem => elem._id == updateInfo.newZoneId);
+    return { newZone, oldZone };
   }
   async edit(id, update) {
     let data = await _repository.findOneAndUpdate({ _id: id }, update, {
