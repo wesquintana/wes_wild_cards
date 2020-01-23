@@ -6,6 +6,9 @@ const _repository = mongoose.model("Deck", Deck);
 
 class DeckService {
   // SECTION Deck calls
+  //#region
+
+  // only gets decks that have their isPrivate property set to false
   async getAllPublic() {
     let data = await _repository.find({ isPrivate: false });
     if (!data) {
@@ -23,6 +26,7 @@ class DeckService {
     return data;
   }
 
+  // gets all decks whose authorId matches the userId being passed, which is gotten from the session's userId (user who's logged in). This userId is grabbed from the DeckController
   async getAllByUserId(userId) {
     let data = await _repository.find({ authorId: userId });
     if (!data) {
@@ -43,11 +47,13 @@ class DeckService {
     return data;
   }
 
+  // DeckController checks to see if user is registered/logged in
   async createDeck(rawData) {
     let data = await _repository.create(rawData);
     return data;
   }
 
+  // finds deck whose Id matches the Id begin passed, as well as checking if its authorId matches. UserId is gotten from DeckController
   async editDeck(id, userId, update) {
     let data = await _repository.findOneAndUpdate(
       { _id: id, authorId: userId },
@@ -60,6 +66,7 @@ class DeckService {
     return data;
   }
 
+  // userId gotten from DeckController
   async removeDeck(id, userId) {
     let data = await _repository.findOneAndRemove({
       _id: id,
@@ -69,8 +76,9 @@ class DeckService {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
     }
   }
-
+  //#endregion
   // SECTION Card calls
+  //#region
   async createCard(deckId, rawData) {
     let data = await _repository.findOneAndUpdate(
       { _id: deckId },
@@ -93,13 +101,16 @@ class DeckService {
   }
 
   // TEST rawData equals a full card obj sent when editing
+  // finds deck whose id and authorId match what's being passed, then targets the card being updated
   async editCard(payload) {
     let data = await _repository.findOneAndUpdate(
       {
         _id: payload.deckId,
         authorId: payload.userId,
+        // cards._id tells mongoose what card subdoc to target
         "cards._id": payload.data._id
       },
+      // the card at the current position (cards._id) gets its value set by the payload
       { $set: { "cards.$": payload.data } },
       { new: true }
     );
@@ -112,6 +123,7 @@ class DeckService {
   async removeCard(payload) {
     let data = await _repository.findOneAndUpdate(
       { _id: payload.deckId, authorId: payload.userId },
+      // removes card whose id matches the payload's cardId
       { $pull: { cards: { _id: payload.cardId } } },
       { new: true }
     );
@@ -119,6 +131,7 @@ class DeckService {
       throw new ApiError("Invalid ID or you do not own this deck", 400);
     }
   }
+  //#endregion
 }
 
 const _deckService = new DeckService();
