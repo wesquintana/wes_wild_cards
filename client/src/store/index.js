@@ -7,7 +7,7 @@ import profileModule from "./ProfileModule";
 import deckModule from "./DeckModule";
 import cardModule from "./CardModule";
 import lobbyModule from "./LobbyModule";
-import socketStore from "./SocketModule";
+import socketModule from "./SocketModule";
 
 Vue.use(Vuex);
 
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     deckModule,
     cardModule,
     lobbyModule,
-    socketStore
+    socketModule
   },
   state: {
     user: {},
