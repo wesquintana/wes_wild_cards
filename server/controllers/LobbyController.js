@@ -6,6 +6,7 @@ import socket from "../socket/SocketService";
 export default class LobbyController {
   constructor() {
     this.router = express
+      // No auth needed for lobby currently
       .Router()
       .post("", this.createLobby)
       .get("/:id", this.getById)
@@ -37,6 +38,7 @@ export default class LobbyController {
       next(error);
     }
   }
+  // moveCard requires newZoneId, cardId. oldZoneId used in params to create a unique route for moving cards but should be passed in body as well
   async moveCard(req, res, next) {
     try {
       let data = await _lobbyService.moveCard(req.params.oldZoneId, req.body);
@@ -46,6 +48,7 @@ export default class LobbyController {
       next(error);
     }
   }
+  // TODO will be used to delete the lobby once all players leave
   async delete(req, res, next) {
     try {
       await _lobbyService.delete(req.params.id);
@@ -55,6 +58,7 @@ export default class LobbyController {
     }
   }
 
+  // not currently in-use, but could be used to add player to lobby
   async edit(req, res, next) {
     try {
       let data = await _lobbyService.edit(req.params.id, req.body);
