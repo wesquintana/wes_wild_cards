@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbconfig";
+// import SocketService so that sockets may be used by the server
 import Socket from "./socket/SocketService";
 
 const server = express();

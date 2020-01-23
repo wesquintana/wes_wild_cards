@@ -10,16 +10,9 @@ class LobbyService {
     return lobby;
   }
   async createLobby(lobbyInfo) {
-    // position 0 = deck, position -1 = player1, position -2 = player2
-    // lobbyInfo.zones["0"].populate(lobbyInfo.deck.cards.id);
-    // lobbyInfo.zones;
-    // lobbyInfo.zones["-2"] = [];
-    // pushes "grid" into zones
-    // for (let i = 1; i <= 18; i++) {
-    //   lobbyInfo.zones[`${i}`] = [];
-    // }
     let lobby = await _repository.create(lobbyInfo);
     // creates zones for player hands
+    // position -2 is Player 2, position -1 Player 1
     let tempSet = [{ position: "-2" }, { position: "-1" }];
     // pushes all card Id's into deck zone
     let cardIds = [];
@@ -32,7 +25,7 @@ class LobbyService {
     for (let i = 1; i <= 18; i++) {
       tempSet.push({ position: `${i}` });
     }
-    // update lobby's zones by $pushing tempSet into lobby's zones
+    // update lobby's zones by $pushing the entirety of tempSet into lobby's zones
     let zoneData = await _repository.findOneAndUpdate(
       { _id: lobby._id },
       { $push: { zones: tempSet } },
@@ -50,9 +43,13 @@ class LobbyService {
       throw new ApiError("Invalid Id", 400);
     }
   }
+
+  // TODO we may be able to specify the appropriate lobby in findOneAndUpdate (see editCard in DeckService)
   async moveCard(oldZoneId, updateInfo) {
     let newZone = await _repository.findOneAndUpdate(
+      // finds new zone where element _id matches the newZoneId being passed
       { zones: { $elemMatch: { _id: updateInfo.newZoneId } } },
+      // pushes cardId the current zone specified in line above, into its cards array
       { $push: { "zones.$.cards": updateInfo.cardId } },
       { new: true }
     );
@@ -60,6 +57,7 @@ class LobbyService {
       throw new ApiError("InvalidId", 400);
     }
     let oldZone = await _repository.findOneAndUpdate(
+      //this findOneAndUpdate works the same as the one above, except to pull the cardId from the old zone
       { zones: { $elemMatch: { _id: oldZoneId } } },
       { $pull: { "zones.$.cards": updateInfo.cardId } },
       { new: true }
@@ -67,7 +65,7 @@ class LobbyService {
     if (!oldZone) {
       throw new ApiError("Invalid ID", 400);
     }
-    // NOTE currently returns the zone that recieves a new card
+    // should return oldZoneId, newZoneId, cardId
     return updateInfo;
   }
   async edit(id, update) {
