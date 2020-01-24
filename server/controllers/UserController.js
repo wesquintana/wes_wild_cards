@@ -6,6 +6,7 @@ import _profileService from "../services/ProfileService";
 //PUBLIC
 export default class UserController {
   constructor() {
+    // posts for login and register are unprotected, everything else is protected NOTE delete is never used, probably not needed
     this.router = express
       .Router()
       .post("/register", this.register)
@@ -30,9 +31,10 @@ export default class UserController {
       res.status(201).send(user);
       let body = {
         name: req.body.name,
-        userId: user._id,
+        userId: user._id, //image url is set to the user's robohash by default, might do something unexpected if the user puts in an interesting name
         imgURL: "https://robohash.org/" + req.body.name + ".png"
       };
+      //creates a profile whenever a user is created
       let profile = await _profileService.createProfile(body);
     } catch (err) {
       next(err);
@@ -75,6 +77,7 @@ export default class UserController {
   }
   async getProfileByUserID(req, res, next) {
     try {
+      //goes to profile service to find a profile by its user id
       let data = await _profileService.getProfileByUserId(req.session.uid);
       return res.send(data);
     } catch (error) {

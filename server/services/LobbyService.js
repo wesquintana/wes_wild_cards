@@ -19,6 +19,13 @@ class LobbyService {
     for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
       cardIds.push(lobbyInfo.deck.cards[i]._id);
     }
+    for (let i = 0; i < cardIds.length; i++) {
+      let tempCardId = cardIds[i];
+      let randCardIndex = Math.floor(Math.random() * cardIds.length);
+      //switches around the position of two cards randomly O(n)
+      cardIds[i] = cardIds[randCardIndex];
+      cardIds[randCardIndex] = tempCardId;
+    }
     // pushes player hands and deck zone into tempSet
     tempSet.push({ position: "0", cards: cardIds });
     // pushes remaining zones into tempSet
@@ -44,7 +51,7 @@ class LobbyService {
     }
   }
 
-  // TODO we may be able to specify the appropriate lobby in findOneAndUpdate (see editCard in DeckService)
+  // TODO we may be able to specify the appropriate lobby in findOneAndUpdate (see editCard in DeckService), shouldnt benecessary all zones have a unique ID, the entire lobby is actually still being found by the zoneID
   async moveCard(oldZoneId, updateInfo) {
     let newZone = await _repository.findOneAndUpdate(
       // finds new zone where element _id matches the newZoneId being passed
