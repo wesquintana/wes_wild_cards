@@ -46,6 +46,13 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async shuffle({ commit, dispatch }, deck) {
+      try {
+        commit("shuffle", deck);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

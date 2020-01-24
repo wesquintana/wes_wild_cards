@@ -88,6 +88,10 @@ export default new Vuex.Store({
         nz => nz._id == payload.data.newZoneId
       );
       state.lobby.zones[newZoneIndex].cards.unshift(payload.data.cardId);
+    },
+    shuffle(state, payload) {
+      state.lobby.zones[2].cards.splice(0, state.lobby.zones[2].cards.length);
+      state.lobby.zones[2].cards.push(payload);
     }
   },
   actions: {
