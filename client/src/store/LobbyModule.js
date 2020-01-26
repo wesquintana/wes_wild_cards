@@ -15,6 +15,7 @@ export default {
     async createLobby({ commit, dispatch }, deckInfo) {
       try {
         let res = await api.post("lobby", { deck: deckInfo });
+        commit("setResource", { name: "activeCard", data: {} });
         commit("setResource", { name: "lobby", data: res.data });
         router.push({
           name: "lobby",
@@ -35,6 +36,7 @@ export default {
         // sends dispatch to emitCard in SocketModule
         dispatch("emitCard", { data: res.data });
         commit("moveCard", { data: res.data });
+        commit("setResource", { name: "activeCard", data: {} });
       } catch (error) {
         console.error(error);
       }
