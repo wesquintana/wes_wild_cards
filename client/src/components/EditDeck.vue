@@ -107,6 +107,7 @@ export default {
         img: this.deckData.img,
         isPrivate: this.deckData.isPrivate
       });
+      // this line confirms edits were submitted before closing the modal. $ references the @submit of the calling method (form)
       $("#editDeckModal").modal("hide");
     }
   }
