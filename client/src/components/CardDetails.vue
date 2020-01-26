@@ -22,7 +22,6 @@
                   <div class="col">
                     <div class="modal-header text-center">
                       <h5 class="modal-title" id="activeCardModalLabel">{{ activeCard.name }}</h5>
-                      <!--TODO create clear Active Card method REVIEW Is this necessary?-->
                       <!-- shows the card roughly as it will be rendered -->
                       <button
                         type="button"
@@ -40,7 +39,7 @@
                 <div class="row">
                   <div v-bind:class="{col:!editing, 'col-6':editing}">
                     <div class="modal-body row">
-                      <div class="col-10">
+                      <div class="col-9">
                         <!-- card code -->
                         <div class="card mb-4" style="width: 20rem; height: 28rem;" v-if="!flipped">
                           <div class="card-body d-inline-flex justify-content-between">
@@ -63,11 +62,15 @@
                         ></div>
                       </div>
                       <!-- column of buttons -->
-                      <div class="col-2">
-                        <button @click="flip">Flip Card</button>
-                        <button>Copy Card</button>
-                        <button @click="editing = !editing">Edit Card</button>
-                        <button @click="deleteCard" data-dismiss="modal">Delete Card</button>
+                      <div class="col-3">
+                        <button class="btn btn-primary btn-block" @click="flip">Flip</button>
+                        <button class="btn btn-primary btn-block">Copy</button>
+                        <button class="btn btn-primary btn-block" @click="editing = !editing">Edit</button>
+                        <button
+                          class="btn btn-primary btn-block"
+                          @click="deleteCard"
+                          data-dismiss="modal"
+                        >Delete</button>
                       </div>
                     </div>
                   </div>
@@ -126,12 +129,16 @@
                         <label class="form-group-label" for="cardImgBack">Choose file, optional</label>
                       </div>
 
-                      <div class="modal-footer d-flex justify-content-center">
-                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> REVIEW Why is this here?-->
+                      <div class="modal-footer d-flex justify-content-right">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          @click="editing = !editing"
+                        >Cancel</button>
                         <button
                           type="submit"
-                          class="btn btn-primary d-flex justify-content-left"
-                        >Save changes!</button>
+                          class="btn btn-primary d-flex justify-content-right"
+                        >Save changes</button>
                       </div>
                     </form>
                     <!-- end Form code -->

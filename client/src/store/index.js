@@ -54,6 +54,8 @@ export default new Vuex.Store({
       state.activeProfile = {};
       state.userDecks = [];
       state.activeDeck = {};
+      state.activeCard = {};
+      state.lobby = { zones: [], cards: [] };
       state.profileDecks = [];
     },
     addUserDeck(state, payload) {
