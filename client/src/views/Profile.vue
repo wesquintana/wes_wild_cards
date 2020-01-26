@@ -21,6 +21,7 @@
           <div class="col d-inline-flex mt-3">
             <h4 class="text-left" v-if="!editing">User Name:&nbsp;</h4>
             <h3 class="text-left" v-if="editing">{{profile.name}}</h3>
+            <!-- Didn't use a form, not necessarily needed, we could add a @submit on each of the text fields to make it function similar to a form  -->
             <input v-else type="text" v-model="profile.name" />
           </div>
         </div>
@@ -67,6 +68,7 @@ export default {
   },
   methods: {
     startEditing() {
+      // editing boolean that gives to DOM access to different elements if they're attempting to edit
       this.editing = !this.editing;
     },
     submitEdits() {

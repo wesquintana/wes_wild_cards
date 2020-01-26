@@ -7,6 +7,7 @@ export default class DeckController {
   constructor() {
     this.router = express
       .Router()
+      // all routes not needing auth positioned before auth path is hit
       .get("", this.getAllPublic)
       .get("/:id/cards", this.getCards)
       .get("/public/:id", this.getPublicDecksByUserId)
@@ -28,6 +29,7 @@ export default class DeckController {
   }
 
   // SECTION Deck calls
+  //#region
   async getAllPublic(req, res, next) {
     try {
       //only gets decks where public = true
@@ -59,6 +61,7 @@ export default class DeckController {
     }
   }
 
+  // function used to get a specific deck, but only a deck that meets conditions set by DeckService
   async getDeckById(req, res, next) {
     try {
       let data = await _deckService.getDeckById(req.params.id, req.session.uid);
@@ -99,8 +102,10 @@ export default class DeckController {
       next(error);
     }
   }
+  //#endregion
 
   // SECTION Card calls
+  //#region
   async getCards(req, res, next) {
     try {
       let data = await _deckService.getCards(req.params.id);
@@ -145,4 +150,6 @@ export default class DeckController {
       next(error);
     }
   }
+
+  //#endregion
 }

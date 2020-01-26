@@ -42,6 +42,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getPersonalProfileByUserId", this.user._id);
+    // initialize socket connection
+    this.$store.dispatch("initializeSocket")
   },
   methods: {
     async login() {

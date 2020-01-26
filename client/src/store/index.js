@@ -7,7 +7,7 @@ import profileModule from "./ProfileModule";
 import deckModule from "./DeckModule";
 import cardModule from "./CardModule";
 import lobbyModule from "./LobbyModule";
-import socketStore from "./SocketModule";
+import socketModule from "./SocketModule";
 
 Vue.use(Vuex);
 
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     deckModule,
     cardModule,
     lobbyModule,
-    socketStore
+    socketModule
   },
   state: {
     user: {},
@@ -81,7 +81,7 @@ export default new Vuex.Store({
         oz => oz._id == payload.data.oldZoneId
       );
       let cardIndex = state.lobby.zones[oldZoneIndex].cards.findIndex(
-        card => card._id == payload.data.cardId
+        card => card == payload.data.cardId
       );
       state.lobby.zones[oldZoneIndex].cards.splice(cardIndex, 1);
       let newZoneIndex = state.lobby.zones.findIndex(
