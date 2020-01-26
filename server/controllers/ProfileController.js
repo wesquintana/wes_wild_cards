@@ -5,6 +5,7 @@ import { Authorize } from "../middleware/authorize.js";
 //PUBLIC
 export default class ProfilesController {
   constructor() {
+    //edit is behind authorize, get is not
     this.router = express
       .Router()
       .get("/:id", this.getById)
@@ -21,6 +22,7 @@ export default class ProfilesController {
 
   async getById(req, res, next) {
     try {
+      //more standard get by id
       let data = await _profileService.getById(req.params.id);
       return res.send(data);
     } catch (error) {
@@ -30,6 +32,7 @@ export default class ProfilesController {
 
   async edit(req, res, next) {
     try {
+      //basic verified edit
       let data = await _profileService.edit(
         req.params.id,
         req.session.uid,

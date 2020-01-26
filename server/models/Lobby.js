@@ -6,6 +6,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 const Zone = new Schema({
   position: { type: String, required: true },
+  //cards are Object Ids and shouldn't allow for any object that doesnt have one to be inserted
   cards: [{ type: ObjectId, ref: "Deck.cards" }]
 });
 

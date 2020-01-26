@@ -22,7 +22,8 @@
                   <div class="col">
                     <div class="modal-header text-center">
                       <h5 class="modal-title" id="activeCardModalLabel">{{ activeCard.name }}</h5>
-                      <!--TODO create clear Active Card method -->
+                      <!--TODO create clear Active Card method REVIEW Is this necessary?-->
+                      <!-- shows the card roughly as it will be rendered -->
                       <button
                         type="button"
                         class="close"
@@ -126,7 +127,7 @@
                       </div>
 
                       <div class="modal-footer d-flex justify-content-center">
-                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> REVIEW Why is this here?-->
                         <button
                           type="submit"
                           class="btn btn-primary d-flex justify-content-left"
