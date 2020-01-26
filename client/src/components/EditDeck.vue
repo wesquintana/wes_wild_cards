@@ -107,7 +107,6 @@ export default {
         img: this.deckData.img,
         isPrivate: this.deckData.isPrivate
       });
-      //what is this code below? 
       $("#editDeckModal").modal("hide");
     }
   }
