@@ -90,14 +90,14 @@ export default new Vuex.Store({
       state.lobby.zones[newZoneIndex].cards.unshift(payload.data.cardId);
     },
     shuffle(state, payload) {
-      state.lobby.zones[2].cards.splice(0, state.lobby.zones[2].cards.length);
-      state.lobby.zones[2].cards.push(payload);
+      state.lobby.zones[2].cards = [...payload];
     }
   },
   actions: {
     //#region -- AUTH STUFF --
     async register({ commit, dispatch }, creds) {
       try {
+        0;
         let user = await AuthService.Register(creds);
         commit("setUser", user);
         router.go(0);
