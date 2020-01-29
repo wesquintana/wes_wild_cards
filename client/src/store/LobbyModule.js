@@ -34,8 +34,8 @@ export default {
           zoneChange
         );
         // sends dispatch to emitCard in SocketModule
-        dispatch("emitCard", { data: res.data });
-        commit("moveCard", { data: res.data });
+        dispatch("emitCard", zoneChange);
+        commit("moveCard", zoneChange);
         commit("setResource", { name: "activeCard", data: {} });
       } catch (error) {
         console.error(error);
@@ -45,7 +45,7 @@ export default {
     async getLobbyById({ commit, dispatch }, lobbyId) {
       try {
         let res = await api.get("lobby/" + lobbyId);
-
+        console.log(res.data);
         commit("setResource", { name: "lobby", data: res.data });
       } catch (error) {
         console.error(error);
