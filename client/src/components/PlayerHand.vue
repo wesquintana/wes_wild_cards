@@ -1,7 +1,11 @@
 <template>
   <div class="player-hand">
     <div class="scroll-x">
-      <div class="d-flex flex-direction-row" style="width: 100%; height: 100%;">
+      <div
+        v-if="zoneData!=undefined"
+        class="d-flex flex-direction-row"
+        style="width: 100%; height: 100%;"
+      >
         <div
           v-if="activeCard._id"
           class="drop-zone"

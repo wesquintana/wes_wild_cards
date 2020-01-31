@@ -10,12 +10,7 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone
-                    v-for="zone in zones"
-                    :key="zone.position"
-                    :zoneData="zone"
-                    class="col-2"
-                  ></zone>
+                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
                 </div>
               </div>
             </div>
@@ -30,9 +25,11 @@
       </div>
       <div class="col-2 play-menu">
         <button class="btn btn-danger btn-lg">Leave Game</button>
-        <rules class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
-        <button @click="shuffle(drawPile.cards)" class="btn btn-success btn-lg">
-          Shuffle
+
+        <rules v-if="lobby!=undefined" class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
+        <button class="btn btn-success btn-lg">
+          Reset Game
+
           <!-- NOTE Does Nothing -->
         </button>
         <button class="btn btn-warning btn-lg">Users</button>
@@ -68,16 +65,24 @@ export default {
   },
   computed: {
     lobby() {
-      return this.$store.state.lobby;
-    },
-    drawPile() {
-      return this.lobby.zones[2];
+      if (this.$store.state.lobby._id) {
+        return this.$store.state.lobby;
+      }
     },
     zones() {
-      return this.lobby.zones.slice(3);
+      if (this.$store.state.lobby._id) {
+        return this.lobby.zones.slice(3);
+      }
+    },
+    drawPile() {
+      if (this.$store.state.lobby._id) {
+        return this.$store.state.lobby.zones[2];
+      }
     },
     playerOneHand() {
-      return this.lobby.zones[1];
+      if (this.$store.state.lobby._id) {
+        return this.$store.state.lobby.zones[1];
+      }
     },
     deck() {
       return this.lobby.deck;
