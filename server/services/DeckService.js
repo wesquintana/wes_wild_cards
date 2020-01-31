@@ -80,6 +80,9 @@ class DeckService {
   // SECTION Card calls
   //#region
   async createCard(deckId, rawData) {
+    if (!rawData.imgBack) {
+      delete rawData.imgBack;
+    }
     let data = await _repository.findOneAndUpdate(
       { _id: deckId },
       { $push: { cards: rawData } },

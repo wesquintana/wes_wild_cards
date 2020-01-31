@@ -25,9 +25,11 @@
       </div>
       <div class="col-2 play-menu">
         <button class="btn btn-danger btn-lg">Leave Game</button>
+
         <rules v-if="lobby!=undefined" class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
         <button class="btn btn-success btn-lg">
           Reset Game
+
           <!-- NOTE Does Nothing -->
         </button>
         <button class="btn btn-warning btn-lg">Users</button>
@@ -90,6 +92,20 @@ export default {
     handleDrop(data) {
       this.over = false;
       alert(`this work?`);
+    },
+    shuffle(deck) {
+      let m = deck.length,
+        t,
+        i;
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = deck[m];
+        deck[m] = deck[i];
+        deck[i] = t;
+      }
+      console.log(deck);
+
+      this.$store.dispatch("shuffle", deck);
     }
   }
 };

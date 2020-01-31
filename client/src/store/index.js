@@ -91,7 +91,10 @@ export default new Vuex.Store({
       let newZoneIndex = state.lobby.zones.findIndex(
         nz => nz._id == payload.newZoneId
       );
+
       state.lobby.zones[newZoneIndex].cards.unshift(payload.cardId);
+
+
     }
     // setActiveCards(state) {
     //   state.lobby.zones.forEach(element => {
@@ -105,6 +108,7 @@ export default new Vuex.Store({
     //#region -- AUTH STUFF --
     async register({ commit, dispatch }, creds) {
       try {
+        0;
         let user = await AuthService.Register(creds);
         commit("setUser", user);
         router.go(0);
