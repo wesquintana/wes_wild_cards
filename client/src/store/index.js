@@ -39,7 +39,8 @@ export default new Vuex.Store({
     activeDeck: {},
     profileDecks: [],
     activeCard: {},
-    lobby: { zones: [], cards: [] }
+    lobby: {}
+    // activeCards: {}
   },
   mutations: {
     setUser(state, user) {
@@ -55,7 +56,7 @@ export default new Vuex.Store({
       state.userDecks = [];
       state.activeDeck = {};
       state.activeCard = {};
-      state.lobby = { zones: [], cards: [] };
+      state.lobby = {};
       state.profileDecks = [];
     },
     addUserDeck(state, payload) {
@@ -80,17 +81,25 @@ export default new Vuex.Store({
     },
     moveCard(state, payload) {
       let oldZoneIndex = state.lobby.zones.findIndex(
-        oz => oz._id == payload.data.oldZoneId
+        oz => oz._id == payload.oldZoneId
       );
       let cardIndex = state.lobby.zones[oldZoneIndex].cards.findIndex(
-        card => card == payload.data.cardId
+        card => card == payload.cardId
+
       );
       state.lobby.zones[oldZoneIndex].cards.splice(cardIndex, 1);
       let newZoneIndex = state.lobby.zones.findIndex(
-        nz => nz._id == payload.data.newZoneId
+        nz => nz._id == payload.newZoneId
       );
-      state.lobby.zones[newZoneIndex].cards.unshift(payload.data.cardId);
+      state.lobby.zones[newZoneIndex].cards.unshift(payload.cardId);
     }
+    // setActiveCards(state) {
+    //   state.lobby.zones.forEach(element => {
+    //     state.activeCards[element.position] = state.lobby.deck.cards.find(card => {
+    //       card._id = element.cards[0];
+    //     })
+    //   });
+    // }
   },
   actions: {
     //#region -- AUTH STUFF --
