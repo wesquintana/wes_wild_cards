@@ -85,7 +85,7 @@ export default {
       }
     },
     deck() {
-      return this.lobby.deck;
+      return this.lobby.zones[2].Cards;
     }
   },
   methods: {

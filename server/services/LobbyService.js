@@ -15,17 +15,28 @@ class LobbyService {
     // position -2 is Player 2, position -1 Player 1
     let tempSet = [{ position: "-2" }, { position: "-1" }];
     // pushes all card Id's into deck zone
-    let cardIds = [];
-    for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
-      cardIds.push(lobbyInfo.deck.cards[i]._id);
+    // let cardIds = [];
+    // for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
+    //   cardIds.push(lobbyInfo.deck.cards[i]._id);
+    // }
+    // for (let i = 0; i < cardIds.length; i++) {
+    //   let tempCardId = cardIds[i];
+    //   let randCardIndex = Math.floor(Math.random() * cardIds.length);
+    //switches around the position of two cards randomly O(n)
+    //   cardIds[i] = cardIds[randCardIndex];
+    //   cardIds[randCardIndex] = tempCardId;
+
+    let m = lobbyInfo.deck.cards.length,
+      cardIds = lobbyInfo.deck.cards,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = cardIds[m];
+      cardIds[m] = cardIds[i];
+      cardIds[i] = t;
     }
-    for (let i = 0; i < cardIds.length; i++) {
-      let tempCardId = cardIds[i];
-      let randCardIndex = Math.floor(Math.random() * cardIds.length);
-      //switches around the position of two cards randomly O(n)
-      cardIds[i] = cardIds[randCardIndex];
-      cardIds[randCardIndex] = tempCardId;
-    }
+    // }
     // pushes player hands and deck zone into tempSet
     tempSet.push({ position: "0", cards: cardIds });
     // pushes remaining zones into tempSet
