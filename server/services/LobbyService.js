@@ -15,10 +15,10 @@ class LobbyService {
     // position -2 is Player 2, position -1 Player 1
     let tempSet = [{ position: "-2" }, { position: "-1" }];
     // pushes all card Id's into deck zone
-    // let cardIds = [];
-    // for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
-    //   cardIds.push(lobbyInfo.deck.cards[i]._id);
-    // }
+    let cardIds = [];
+    for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
+      cardIds.push(lobbyInfo.deck.cards[i]._id);
+    }
     // for (let i = 0; i < cardIds.length; i++) {
     //   let tempCardId = cardIds[i];
     //   let randCardIndex = Math.floor(Math.random() * cardIds.length);
@@ -26,8 +26,7 @@ class LobbyService {
     //   cardIds[i] = cardIds[randCardIndex];
     //   cardIds[randCardIndex] = tempCardId;
 
-    let m = lobbyInfo.deck.cards.length,
-      cardIds = lobbyInfo.deck.cards,
+    let m = cardIds.length,
       t,
       i;
     while (m) {
@@ -93,6 +92,26 @@ class LobbyService {
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this board", 400);
     }
+    return data;
+  }
+  async shuffleCards(id, update) {
+    //NOTE takes in card array and shuffles the ids within the array
+    let m = update.length,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = update[m];
+      update[m] = update[i];
+      update[i] = t;
+    }
+    let data = await _repository.findOneAndUpdate(
+      // finds new zone where element _id matches the newZoneId being passed
+      { zones: { $elemMatch: { _id: id } } },
+      // pushes cardId the current zone specified in line above, into its cards array
+      { $set: { "zones.$.cards": update } },
+      { new: true }
+    );
     return data;
   }
 }

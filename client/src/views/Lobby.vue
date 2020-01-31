@@ -29,7 +29,6 @@
         <rules v-if="lobby!=undefined" class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
         <button class="btn btn-success btn-lg">
           Reset Game
-
           <!-- NOTE Does Nothing -->
         </button>
         <button class="btn btn-warning btn-lg">Users</button>
@@ -85,7 +84,7 @@ export default {
       }
     },
     deck() {
-      return this.lobby.zones[2].Cards;
+      return this.lobby.deck;
     }
   },
   methods: {

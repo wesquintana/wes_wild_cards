@@ -12,6 +12,7 @@ export default class LobbyController {
       .get("/:id", this.getById)
       .put("/:oldZoneId/cards", this.moveCard)
       .put("/:id", this.edit)
+      .put("/:id/shuffle", this.shuffleCards)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
   }
@@ -62,6 +63,16 @@ export default class LobbyController {
   async edit(req, res, next) {
     try {
       let data = await _lobbyService.edit(req.params.id, req.body);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async shuffleCards(req, res, next) {
+    try {
+      let data = await _lobbyService.shuffleCards(req.params.id, req.body);
+
       return res.send(data);
     } catch (error) {
       next(error);
