@@ -43,7 +43,7 @@ export default class LobbyController {
   async moveCard(req, res, next) {
     try {
       let data = await _lobbyService.moveCard(req.params.oldZoneId, req.body);
-      socket.notifyMoveCard(data);
+
       return res.send(data);
     } catch (error) {
       next(error);

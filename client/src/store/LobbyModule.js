@@ -35,7 +35,7 @@ export default {
         );
         // sends dispatch to emitCard in SocketModule
         dispatch("emitCard", zoneChange);
-        commit("moveCard", zoneChange);
+
         commit("setResource", { name: "activeCard", data: {} });
       } catch (error) {
         console.error(error);
