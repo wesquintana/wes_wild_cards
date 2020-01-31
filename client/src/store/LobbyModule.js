@@ -53,7 +53,10 @@ export default {
     },
     async shuffle({ commit, dispatch }, deck) {
       try {
-        commit("shuffle", deck);
+        let res = await api.put("lobby/" + deck._id + "/shuffle", deck);
+        console.log(res.data);
+
+        commit("shuffle", res.data);
       } catch (error) {
         console.error(error);
       }

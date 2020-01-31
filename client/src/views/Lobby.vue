@@ -27,10 +27,8 @@
         <button class="btn btn-danger btn-lg">Leave Game</button>
 
         <rules v-if="lobby!=undefined" class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
-        <button class="btn btn-success btn-lg">
-          Reset Game
-          <!-- NOTE Does Nothing -->
-        </button>
+        <button v-if="lobby!=undefined" class="btn btn-success btn-lg" @click="shuffle">Shuffle</button>
+
         <button class="btn btn-warning btn-lg">Users</button>
       </div>
     </div>
@@ -92,17 +90,8 @@ export default {
       this.over = false;
       alert(`this work?`);
     },
-    shuffle(deck) {
-      let m = deck.length,
-        t,
-        i;
-      while (m) {
-        i = Math.floor(Math.random() * m--);
-        t = deck[m];
-        deck[m] = deck[i];
-        deck[i] = t;
-      }
-      console.log(deck);
+    shuffle() {
+      let deck = this.$store.state.lobby.zones.find(z => z.position == "0");
 
       this.$store.dispatch("shuffle", deck);
     }

@@ -71,7 +71,7 @@ export default class LobbyController {
 
   async shuffleCards(req, res, next) {
     try {
-      let data = await _lobbyService.shuffleCards(req.params.id, req.body);
+      let data = await _lobbyService.shuffleCards(req.body);
 
       return res.send(data);
     } catch (error) {

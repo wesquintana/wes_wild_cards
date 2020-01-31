@@ -94,25 +94,26 @@ class LobbyService {
     }
     return data;
   }
-  async shuffleCards(id, update) {
+  async shuffleCards(update) {
     //NOTE takes in card array and shuffles the ids within the array
-    let m = update.length,
+    let m = update.cards.length,
+      shuffledUpdate = update.cards,
       t,
       i;
     while (m) {
       i = Math.floor(Math.random() * m--);
-      t = update[m];
-      update[m] = update[i];
-      update[i] = t;
+      t = shuffledUpdate[m];
+      shuffledUpdate[m] = shuffledUpdate[i];
+      shuffledUpdate[i] = t;
     }
     let data = await _repository.findOneAndUpdate(
-      // finds new zone where element _id matches the newZoneId being passed
-      { zones: { $elemMatch: { _id: id } } },
+      // finds new zone where element _id matches the deck zone
+      { zones: { $elemMatch: { _id: update._id } } },
       // pushes cardId the current zone specified in line above, into its cards array
-      { $set: { "zones.$.cards": update } },
+      { $set: { "zones.$.cards": shuffledUpdate } },
       { new: true }
     );
-    return data;
+    return data.zones.find(z => z._id == update._id);
   }
 }
 
