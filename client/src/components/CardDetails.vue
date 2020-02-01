@@ -200,7 +200,7 @@ export default {
   align-self: center;
 }
 #card-face-img {
-  border-radius: 1em;
+  border-radius: 0.85em;
 }
 #card-back-img {
   border: 1em;

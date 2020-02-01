@@ -2,7 +2,7 @@
   <div class="edit-deck">
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       data-toggle="modal"
       data-target="#editDeckModal"
     >Edit</button>
