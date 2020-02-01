@@ -17,10 +17,6 @@ export default {
       socket.on("moveCard", data => {
         commit("moveCard", data);
       });
-    },
-    // emits signal to socket on SocketService
-    emitCard({ commit, dispatch }, data) {
-      socket.emit("emitCard", data);
     }
   }
 };
