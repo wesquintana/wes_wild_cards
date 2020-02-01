@@ -41,21 +41,27 @@
                     <div class="modal-body row">
                       <div class="col-9">
                         <!-- card code -->
-                        <div class="card mb-4" style="width: 20rem; height: 28rem;" v-if="!flipped">
+                        <div class="card" style="width: 20rem; height: 28rem;" v-if="!flipped">
                           <div class="card-body d-inline-flex justify-content-between">
                             <h5 class="card-title text-wrap">{{ activeCard.name }}</h5>
                             <h5 class="card-title text-wrap">{{ activeCard.category }}</h5>
                           </div>
-                          <div class="card-body">
+                          <div class="card-body image-centering">
                             <!-- card face image (top half of card) -->
-                            <img :src="activeCard.imgFace" placeholder />
+                            <img
+                              :src="activeCard.imgFace"
+                              id="card-face-img"
+                              style="max-width: 100%; max-height:100%"
+                              placeholder
+                            />
                           </div>
                           <div class="card-body">
                             <p class="card-text text-left text-wrap">{{ activeCard.content }}</p>
                           </div>
                         </div>
                         <div
-                          class="card mb-4"
+                          class="card"
+                          id="card-back-img"
                           style="width: 20rem; height: 28rem;"
                           v-else
                           :style="'background-image: url('+activeCard.imgBack+'); background-size: cover'"
@@ -189,5 +195,14 @@ export default {
 <style scoped>
 .full-width-modal {
   max-width: 1000px;
+}
+.image-centering {
+  align-self: center;
+}
+#card-face-img {
+  border-radius: 1em;
+}
+#card-back-img {
+  border: 1em;
 }
 </style>

@@ -50,6 +50,7 @@
                   <!-- card face image (top half of card) -->
                   <img
                     :src="displayedNewCard.imgFace"
+                    id="card-face-img"
                     placeholder
                     style="max-width: 100%; max-height:100
                   %"
@@ -193,5 +194,8 @@ export default {
 }
 .image-centering {
   align-self: center;
+}
+#card-face-img {
+  border-radius: 1em;
 }
 </style>
