@@ -19,13 +19,23 @@ class LobbyService {
     for (let i = 0; i < lobbyInfo.deck.cards.length; i++) {
       cardIds.push(lobbyInfo.deck.cards[i]._id);
     }
-    for (let i = 0; i < cardIds.length; i++) {
-      let tempCardId = cardIds[i];
-      let randCardIndex = Math.floor(Math.random() * cardIds.length);
-      //switches around the position of two cards randomly O(n)
-      cardIds[i] = cardIds[randCardIndex];
-      cardIds[randCardIndex] = tempCardId;
+    // for (let i = 0; i < cardIds.length; i++) {
+    //   let tempCardId = cardIds[i];
+    //   let randCardIndex = Math.floor(Math.random() * cardIds.length);
+    //switches around the position of two cards randomly O(n)
+    //   cardIds[i] = cardIds[randCardIndex];
+    //   cardIds[randCardIndex] = tempCardId;
+
+    let m = cardIds.length,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = cardIds[m];
+      cardIds[m] = cardIds[i];
+      cardIds[i] = t;
     }
+    // }
     // pushes player hands and deck zone into tempSet
     tempSet.push({ position: "0", cards: cardIds });
     // pushes remaining zones into tempSet
@@ -83,6 +93,27 @@ class LobbyService {
       throw new ApiError("Invalid ID or you do not own this board", 400);
     }
     return data;
+  }
+  async shuffleCards(update) {
+    //NOTE takes in card array and shuffles the ids within the array
+    let m = update.cards.length,
+      shuffledUpdate = update.cards,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = shuffledUpdate[m];
+      shuffledUpdate[m] = shuffledUpdate[i];
+      shuffledUpdate[i] = t;
+    }
+    let data = await _repository.findOneAndUpdate(
+      // finds new zone where element _id matches the deck zone
+      { zones: { $elemMatch: { _id: update._id } } },
+      // pushes cardId the current zone specified in line above, into its cards array
+      { $set: { "zones.$.cards": shuffledUpdate } },
+      { new: true }
+    );
+    return data.zones.find(z => z._id == update._id);
   }
 }
 

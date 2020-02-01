@@ -33,10 +33,6 @@ export default {
           "lobby/" + zoneChange.oldZoneId + "/cards",
           zoneChange
         );
-        // sends dispatch to emitCard in SocketModule
-        dispatch("emitCard", zoneChange);
-        commit("moveCard", zoneChange);
-        commit("setResource", { name: "activeCard", data: {} });
       } catch (error) {
         console.error(error);
       }
@@ -53,7 +49,10 @@ export default {
     },
     async shuffle({ commit, dispatch }, deck) {
       try {
-        commit("shuffle", deck);
+        let res = await api.put("lobby/" + deck._id + "/shuffle", deck);
+        console.log(res.data);
+
+        commit("shuffle", res.data);
       } catch (error) {
         console.error(error);
       }

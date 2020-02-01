@@ -9,7 +9,7 @@
         <div
           v-if="activeCard._id"
           class="drop-zone"
-          @click="moveCard"
+          @click.prevent="moveCard"
           dropzone="zone"
           @dragover.prevent
           @drop.prevent="moveCard"
@@ -39,22 +39,20 @@ export default {
     moveCard() {
       let card = this.$store.state.activeCard;
       if (card._id) {
-        this.$store.dispatch("setActiveCard", {});
         let oldZone = {};
         this.$store.state.lobby.zones.forEach(z => {
           let found = z.cards.findIndex(c => c == card._id);
           if (found != -1) {
-            z.cards.splice(found, 1);
             oldZone = z;
           }
         });
-        this.zoneData.cards.unshift(card._id);
         let zoneChange = {
           oldZoneId: oldZone._id,
           newZoneId: this.zoneData._id,
           cardId: card._id
         };
         this.$store.dispatch("moveCard", zoneChange);
+        this.$store.dispatch("setActiveCard", {});
       }
     }
   },

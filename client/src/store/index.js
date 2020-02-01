@@ -80,29 +80,32 @@ export default new Vuex.Store({
       state.activeDeck.cards.splice(index, 1);
     },
     moveCard(state, payload) {
+      // let z1 = state.lobby.zones.find(oz => oz._id == payload.oldZoneId);
+      // let z2 = state.lobby.zones.find(nz => nz._id == payload.newZoneId);
+      // let card = z1.cards.find(c => c == payload.cardId);
+
+      // z1.cards.splice(z1.cards.indexOf(card), 1);
+      // z2.cards.unshift(card);
+
       let oldZoneIndex = state.lobby.zones.findIndex(
         oz => oz._id == payload.oldZoneId
       );
       let cardIndex = state.lobby.zones[oldZoneIndex].cards.findIndex(
         card => card == payload.cardId
-
       );
       state.lobby.zones[oldZoneIndex].cards.splice(cardIndex, 1);
       let newZoneIndex = state.lobby.zones.findIndex(
-        nz => nz._id == payload.newZoneId
+        z => z._id == payload.newZoneId
       );
 
       state.lobby.zones[newZoneIndex].cards.unshift(payload.cardId);
-
-
+    },
+    shuffle(state, payload) {
+      let zoneIndex = state.lobby.zones.findIndex(
+        zone => zone._id == payload._id
+      );
+      state.lobby.zones[zoneIndex].cards = payload.cards;
     }
-    // setActiveCards(state) {
-    //   state.lobby.zones.forEach(element => {
-    //     state.activeCards[element.position] = state.lobby.deck.cards.find(card => {
-    //       card._id = element.cards[0];
-    //     })
-    //   });
-    // }
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -144,15 +147,5 @@ export default new Vuex.Store({
         console.error(error);
       }
     }
-
-    //#endregion
-
-    //#region -- BOARDS --
-
-    //#endregion
-
-    //#region -- LISTS --
-
-    //#endregion
   }
 });
