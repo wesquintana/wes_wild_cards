@@ -9,7 +9,7 @@
         <div
           v-if="activeCard._id"
           class="drop-zone"
-          @click="moveCard"
+          @click.prevent="moveCard"
           dropzone="zone"
           @dragover.prevent
           @drop.prevent="moveCard"
@@ -37,7 +37,6 @@ export default {
   props: ["zoneData"],
   methods: {
     moveCard() {
-      console.log("moving card method");
       let card = this.$store.state.activeCard;
       if (card._id) {
         let oldZone = {};

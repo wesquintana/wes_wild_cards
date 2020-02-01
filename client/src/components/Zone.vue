@@ -7,6 +7,7 @@
         dropzone="zone"
         @dragover.prevent
         @drop.prevent="moveCard"
+        @click.prevent="moveCard"
       ></div>
       <card-sticker-two :cardId="zoneData.cards[0]"></card-sticker-two>
     </div>
@@ -30,7 +31,6 @@ export default {
   },
   methods: {
     moveCard() {
-      console.log("moving card method");
       let card = this.$store.state.activeCard;
       if (card._id) {
         let oldZone = {};

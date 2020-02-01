@@ -29,14 +29,10 @@ export default {
     // Replace saveLobby with moveCard, commit changes to zones to store
     async moveCard({ commit, dispatch }, zoneChange) {
       try {
-        console.log("Module Move Card", zoneChange);
-
         let res = await api.put(
           "lobby/" + zoneChange.oldZoneId + "/cards",
           zoneChange
         );
-        // sends dispatch to emitCard in SocketModule
-        // dispatch("emitCard", zoneChange);
       } catch (error) {
         console.error(error);
       }

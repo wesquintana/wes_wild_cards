@@ -15,14 +15,8 @@ export default {
       // register all listeners\
       // NOTE do we need this?
       socket.on("moveCard", data => {
-        console.log("CARD MOVING", data);
-
         commit("moveCard", data);
       });
-    },
-    // emits signal to socket on SocketService
-    emitCard({ commit, dispatch }, data) {
-      // socket.emit("emitCard", data);
     }
   }
 };

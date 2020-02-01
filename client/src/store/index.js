@@ -80,7 +80,6 @@ export default new Vuex.Store({
       state.activeDeck.cards.splice(index, 1);
     },
     moveCard(state, payload) {
-      console.log("MoveCard Mutation", payload);
       // let z1 = state.lobby.zones.find(oz => oz._id == payload.oldZoneId);
       // let z2 = state.lobby.zones.find(nz => nz._id == payload.newZoneId);
       // let card = z1.cards.find(c => c == payload.cardId);
@@ -107,13 +106,6 @@ export default new Vuex.Store({
       );
       state.lobby.zones[zoneIndex].cards = payload.cards;
     }
-    // setActiveCards(state) {
-    //   state.lobby.zones.forEach(element => {
-    //     state.activeCards[element.position] = state.lobby.deck.cards.find(card => {
-    //       card._id = element.cards[0];
-    //     })
-    //   });
-    // }
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -155,15 +147,5 @@ export default new Vuex.Store({
         console.error(error);
       }
     }
-
-    //#endregion
-
-    //#region -- BOARDS --
-
-    //#endregion
-
-    //#region -- LISTS --
-
-    //#endregion
   }
 });
