@@ -115,6 +115,7 @@ class LobbyService {
     );
     return shuffledUpdate;
   }
+
 }
 
 const _lobbyService = new LobbyService();

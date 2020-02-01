@@ -20,6 +20,15 @@ export default {
       socket.on("shuffle", data => {
         commit("shuffle", data);
       })
+
+      socket.on("player", data => {
+        commit("addPlayer", data);
+      })
+
+      socket.on("reroutePlayer", () => {
+
+        { commit("reroutePlayer") };
+      })
     }
   }
 };
