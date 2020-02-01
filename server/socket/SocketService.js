@@ -22,6 +22,10 @@ class Socket {
   notifyMoveCard(data) {
     this.io.emit("moveCard", data);
   }
+
+  notifyShuffleDeck(data) {
+    this.io.emit("shuffle", data);
+  }
 }
 
 const socket = new Socket();

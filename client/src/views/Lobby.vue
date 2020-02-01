@@ -92,7 +92,6 @@ export default {
     },
     shuffle() {
       let deck = this.$store.state.lobby.zones.find(z => z.position == "0");
-
       this.$store.dispatch("shuffle", deck);
     }
   }
