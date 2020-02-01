@@ -4,9 +4,26 @@ class Socket {
     this.rooms = {};
     //Server listeners
     io.sockets.on("connection", socket => {
-      socket.on("join", data => {
-        socket.join(data)
+      socket.on("join", room => {
+        socket.join(room)
+        this.io.in(room).clients((error, clients) => {
+          if (error) throw new Error(error);
+          if (clients.length < 3) {
+            socket.emit("player", clients.length)
+          } else {
+            socket.emit("reroutePlayer")
+            socket.disconnect();
+          }
+        })
       });
+      // if (io.sockets.clients(room).length == 1) {
+      //   socket.emit("player", 1);
+      // } else if (io.socket.clients(room).length == 2) {
+      //   socket.emit("player", 2);
+      // } else {
+      //   socket.emit("reroutePlayer");
+      //   socket.disconnect();
+      // }
     });
   }
   newConnection(socket) {

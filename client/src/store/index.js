@@ -39,7 +39,8 @@ export default new Vuex.Store({
     activeDeck: {},
     profileDecks: [],
     activeCard: {},
-    lobby: {}
+    lobby: {},
+    player: 0
     // activeCards: {}
   },
   mutations: {
@@ -58,6 +59,7 @@ export default new Vuex.Store({
       state.activeCard = {};
       state.lobby = {};
       state.profileDecks = [];
+      state.player = 0;
     },
     addUserDeck(state, payload) {
       state.userDecks.push(payload);
@@ -102,6 +104,15 @@ export default new Vuex.Store({
     },
     shuffle(state, payload) {
       state.lobby.zones[2].cards = payload.cards;
+    },
+
+    addPlayer(state, payload) {
+      state.player = payload;
+    },
+
+    reroutePlayer(state) {
+      console.log("reroute player");
+      router.push({ name: "home" })
     }
   },
   actions: {
