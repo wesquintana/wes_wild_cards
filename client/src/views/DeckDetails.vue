@@ -15,14 +15,14 @@
         <button class="btn btn secondary" @click.prevent="createLobby">Start Game</button>
       </div>
       <div class="col-6">
-        <h2 class="text-center">{{ activeDeck.title }}</h2>
-        <p>{{ activeDeck.description }}</p>
+        <h2 class="text-center" id="deck-title">{{ activeDeck.title }}</h2>
+        <p id="deck-desc">{{ activeDeck.description }}</p>
       </div>
       <div class="col-3">
-        <rules class="rules" :deckData="activeDeck">Rules</rules>
+        <rules class="rules" id="rule-enable" :deckData="activeDeck">Rules</rules>
       </div>
       <div class="col-12">
-        <h4 class="text-left">Cards</h4>
+        <h4 class="text-left" id="deck-detail-header">Cards</h4>
         <div class="row">
           <!-- plug in spot to create a card -->
           <new-card class="col-2" id="deck-new-card"></new-card>
@@ -87,8 +87,24 @@ export default {
 .rules:hover {
   cursor: pointer;
 }
+#rule-enable {
+  margin-top: 1rem;
+  color: white;
+  text-align: right;
+  border-bottom: 1px solid white;
+}
 #add-card {
   font-size: 4rem;
+}
+#deck-desc {
+  color: white;
+}
+#deck-title {
+  color: white;
+  margin-top: 1rem;
+}
+#deck-detail-header {
+  color: white;
 }
 #deck-cards {
   padding-bottom: 1rem;
