@@ -41,7 +41,6 @@ export default {
     async getLobbyById({ commit, dispatch }, lobbyId) {
       try {
         let res = await api.get("lobby/" + lobbyId);
-        console.log(res.data);
         commit("setResource", { name: "lobby", data: res.data });
       } catch (error) {
         console.error(error);
@@ -50,9 +49,6 @@ export default {
     async shuffle({ commit, dispatch }, deck) {
       try {
         let res = await api.put("lobby/" + deck._id + "/shuffle", deck);
-        console.log(res.data);
-
-        commit("shuffle", res.data);
       } catch (error) {
         console.error(error);
       }
