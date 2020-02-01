@@ -59,6 +59,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getLobbyById", this.$route.params.id);
+    this.$store.dispatch("initializeSocket", this.$route.params.id);
   },
   computed: {
     lobby() {
