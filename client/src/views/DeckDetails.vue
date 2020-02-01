@@ -11,12 +11,8 @@
           class="btn btn-danger"
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
           @click.prevent="removeDeck"
-        >
-          Delete
-        </button>
-        <button class="btn btn secondary" @click.prevent="createLobby">
-          Start Game
-        </button>
+        >Delete</button>
+        <button class="btn btn secondary" @click.prevent="createLobby">Start Game</button>
       </div>
       <div class="col-6">
         <h2 class="text-center">{{ activeDeck.title }}</h2>
@@ -27,12 +23,13 @@
       </div>
       <div class="col-12">
         <h4 class="text-left">Cards</h4>
-        <div class="row scroll-x">
+        <div class="row">
           <!-- plug in spot to create a card -->
-          <new-card class="col-2"></new-card>
+          <new-card class="col-2" id="deck-new-card"></new-card>
           <!-- plug in all cards in deck -->
           <card-sticker
             class="col-2"
+            id="deck-cards"
             v-for="card in activeDeck.cards"
             :key="card._id"
             :cardData="card"
@@ -92,5 +89,11 @@ export default {
 }
 #add-card {
   font-size: 4rem;
+}
+#deck-cards {
+  padding-bottom: 1rem;
+}
+#deck-new-card {
+  padding-bottom: 1rem;
 }
 </style>
