@@ -18,7 +18,7 @@
 
           <div class="col-12 hand-area">
             <div class="row">
-              <player-hand :zoneData="playerOneHand"></player-hand>
+              <player-hand :zoneData="(player==1) ? playerOneHand : playerTwoHand"></player-hand>
             </div>
           </div>
         </div>
@@ -82,8 +82,16 @@ export default {
         return this.$store.state.lobby.zones[1];
       }
     },
+    playerTwoHand() {
+      if (this.$store.state.lobby._id) {
+        return this.$store.state.lobby.zones[0];
+      }
+    },
     deck() {
       return this.lobby.deck;
+    },
+    player() {
+      return this.$store.state.player;
     }
   },
   methods: {
