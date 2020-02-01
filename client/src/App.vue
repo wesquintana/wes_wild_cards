@@ -103,6 +103,7 @@ export default {
   background-image: url("./assets/felt.jpg");
   background-size: 250px;
   background-repeat: repeat;
+  min-height: 100vh;
 }
 
 #nav {
