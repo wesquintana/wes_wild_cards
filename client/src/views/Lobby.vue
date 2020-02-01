@@ -59,6 +59,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getLobbyById", this.$route.params.id);
+    this.$store.dispatch("initializeSocket", this.$route.params.id);
   },
   computed: {
     lobby() {
@@ -92,7 +93,7 @@ export default {
     },
     shuffle() {
       let deck = this.$store.state.lobby.zones.find(z => z.position == "0");
-
+      deck.room = this.$route.params.id;
       this.$store.dispatch("shuffle", deck);
     }
   }
