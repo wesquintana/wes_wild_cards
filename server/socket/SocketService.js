@@ -5,7 +5,6 @@ class Socket {
     //Server listeners
     io.sockets.on("connection", socket => {
       socket.on("join", data => {
-        console.log(data);
         socket.join(data)
       });
     });
@@ -17,20 +16,18 @@ class Socket {
       message: "Successfully Connected"
     });
     // passes data to notifyMoveCard after receiving signal from emetCard on client
-    socket.on("emitCard", data => {
-      this.notifyMoveCard(data);
-    });
+    // socket.on("emitCard", data => {
+    //   this.notifyMoveCard(data);
+    // });
   }
 
   // runs when called by socket.on
   notifyMoveCard(data) {
-    console.log(this.io.sockets);
-    console.log(data.room);
     this.io.sockets.in(data.room).emit("moveCard", data);
   }
 
   notifyShuffleDeck(data) {
-    this.io.emit("shuffle", data);
+    this.io.sockets.in(data.room).emit("shuffle", data);
   }
 }
 
