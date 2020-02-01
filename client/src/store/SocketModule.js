@@ -17,6 +17,9 @@ export default {
       socket.on("moveCard", data => {
         commit("moveCard", data);
       });
+      socket.on("shuffle", data => {
+        commit("shuffle", data);
+      })
     }
   }
 };
