@@ -101,10 +101,7 @@ export default new Vuex.Store({
       state.lobby.zones[newZoneIndex].cards.unshift(payload.cardId);
     },
     shuffle(state, payload) {
-      let zoneIndex = state.lobby.zones.findIndex(
-        zone => zone._id == payload._id
-      );
-      state.lobby.zones[zoneIndex].cards = payload.cards;
+      state.lobby.zones[2].cards = payload.cards;
     }
   },
   actions: {
