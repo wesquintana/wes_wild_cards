@@ -9,7 +9,7 @@
         @drop.prevent="moveCard"
         @click.prevent="moveCard"
       ></div>
-      <card-sticker-two :cardId="zoneData.cards[0]"></card-sticker-two>
+      <card-sticker-two :cardId="zoneData.cards[0]" :zone="zoneData"></card-sticker-two>
     </div>
   </div>
 </template>
