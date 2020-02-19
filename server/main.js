@@ -16,7 +16,7 @@ DbContext.connect();
 Socket.setIO(io);
 
 //Sets the port to Heroku's, and the files to the built project
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 server.use(express.static(__dirname + "/../client/dist"));
 
 var whitelist = [
