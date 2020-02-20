@@ -2,7 +2,7 @@
   <div class="player-hand">
     <div class="scroll-x">
       <div
-        v-if="zoneData!=undefined"
+        v-if="zoneData != undefined"
         class="d-flex flex-direction-row"
         style="width: 100%; height: 100%;"
       >
@@ -18,6 +18,7 @@
           class="col-2"
           v-for="(card, index) in zoneData.cards"
           :key="card._id"
+          :zone="zoneData"
           :cardId="zoneData.cards[index]"
         ></card-sticker-two>
       </div>
