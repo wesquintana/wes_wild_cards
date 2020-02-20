@@ -6,7 +6,7 @@ export default {
   actions: {
     initializeSocket({ commit, dispatch }, lobbyId) {
       //establish connection with socket
-      socket = io("https://wild-cards.herokuapp.com/");
+      socket = io("http://wild-cards.herokuapp.com/");
       //Handle any on connection events
       socket.on("connect", () => {
         socket.emit("join", lobbyId);
