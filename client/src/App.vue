@@ -5,10 +5,12 @@
         <div class="col-12">
           <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
             <h2>
-              <router-link class="navbar-brand" :to="{name:'home'}" href="#">Wild Card</router-link>
+              <router-link class="navbar-brand" :to="{ name: 'home' }" href="#"
+                >Wild Cards</router-link
+              >
             </h2>
             <div class="dropdown profile-name">
-              {{activeProfile.name}}
+              {{ activeProfile.name }}
               <button
                 class="btn btn-dark"
                 type="button"
@@ -23,18 +25,28 @@
                 class="dropdown-menu border dropdown-menu-right"
                 aria-labelledby="dropdownMenuButton"
               >
-                <a class="dropdown-item" v-if="user.hasOwnProperty('email')" @click="logout">Log Out</a>
+                <a
+                  class="dropdown-item"
+                  v-if="user.hasOwnProperty('email')"
+                  @click="logout"
+                  >Log Out</a
+                >
                 <a class="dropdown-item" v-else @click="login">Log In</a>
                 <a
                   class="dropdown-item"
                   v-if="!user.hasOwnProperty('email')"
                   @click="register"
-                >Register</a>
+                  >Register</a
+                >
                 <router-link
-                  :to="{name: 'profile', params: {profileId: this.activeProfile._id}}"
+                  :to="{
+                    name: 'profile',
+                    params: { profileId: this.activeProfile._id }
+                  }"
                   class="dropdown-item"
                   v-if="user.hasOwnProperty('email')"
-                >Profile</router-link>
+                  >Profile</router-link
+                >
               </div>
             </div>
           </nav>
@@ -57,8 +69,6 @@ export default {
   mounted() {
     this.$store.dispatch("getPersonalProfileByUserId", this.user._id);
     // initialize socket connection
-
-
   },
   methods: {
     async login() {
