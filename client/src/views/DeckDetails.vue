@@ -2,10 +2,14 @@
   <div class="container-fluid deck-details">
     <div class="row">
       <div class="col-2">
-        <rules class="rules" id="rule-enable" :deckData="activeDeck">Rules</rules>
+        <rules class="rules" id="rule-enable" :deckData="activeDeck"
+          >Rules</rules
+        >
       </div>
       <div class="col-2">
-        <button class="btn btn-success" @click.prevent="createLobby">Start Game</button>
+        <button class="btn btn-success" @click.prevent="createLobby">
+          Start Game
+        </button>
       </div>
       <div class="col-4">
         <h2 class="text-center" id="deck-title">{{ activeDeck.title }}</h2>
@@ -23,7 +27,9 @@
           id="deck-delete"
           v-if="this.$store.state.user._id === this.activeDeck.authorId"
           @click.prevent="removeDeck"
-        >Delete</button>
+        >
+          Delete
+        </button>
       </div>
       <div class="col-12">
         <h4 class="text-left" id="deck-detail-header">Cards</h4>
@@ -114,8 +120,6 @@ export default {
 }
 #deck-detail-header {
   color: white;
-}
-#deck-delete {
 }
 #deck-cards {
   padding-bottom: 1rem;
