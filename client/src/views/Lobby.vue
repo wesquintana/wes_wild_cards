@@ -10,7 +10,12 @@
               </div>
               <div class="col-10 card-zone">
                 <div class="row card-row">
-                  <zone v-for="zone in zones" :key="zone.position" :zoneData="zone" class="col-2"></zone>
+                  <zone
+                    v-for="zone in zones"
+                    :key="zone.position"
+                    :zoneData="zone"
+                    class="col-2"
+                  ></zone>
                 </div>
               </div>
             </div>
@@ -18,7 +23,9 @@
 
           <div class="col-12 hand-area">
             <div class="row">
-              <player-hand :zoneData="(player==1) ? playerOneHand : playerTwoHand"></player-hand>
+              <player-hand
+                :zoneData="player == 1 ? playerOneHand : playerTwoHand"
+              ></player-hand>
             </div>
           </div>
         </div>
@@ -26,8 +33,19 @@
       <div class="col-2 play-menu">
         <button class="btn btn-danger btn-lg">Leave Game</button>
 
-        <rules v-if="lobby!=undefined" class="btn btn-primary btn-lg" :deckData="deck">Rules</rules>
-        <button v-if="lobby!=undefined" class="btn btn-success btn-lg" @click="shuffle">Shuffle</button>
+        <rules
+          v-if="lobby != undefined"
+          class="btn btn-primary btn-lg"
+          :deckData="deck"
+          >Rules</rules
+        >
+        <button
+          v-if="lobby != undefined"
+          class="btn btn-success btn-lg"
+          @click="shuffle"
+        >
+          Shuffle
+        </button>
 
         <button class="btn btn-warning btn-lg">Users</button>
       </div>
@@ -137,10 +155,13 @@ export default {
   margin-top: 1.5rem;
 }
 .play-menu {
-  background-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f5eaea;
   height: 93.1vh;
   display: flex;
   flex-direction: column;
+  border-top: solid 10px black !important;
+  border-left: solid 10px black !important;
 }
 .btn {
   margin-top: 1rem;

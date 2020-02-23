@@ -68,7 +68,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getPersonalProfileByUserId", this.user._id);
-    // initialize socket connection
   },
   methods: {
     async login() {
@@ -191,7 +190,7 @@ a.dropdown-item {
   filter: drop-shadow(0px 20px 20px black) !important;
 }
 .toppy {
-  min-height: 85px;
+  min-height: 70px;
   padding-left: 0;
 }
 </style>

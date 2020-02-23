@@ -9,7 +9,10 @@
         @drop.prevent="moveCard"
         @click.prevent="moveCard"
       ></div>
-      <card-sticker-two :cardId="zoneData.cards[0]" :zone="zoneData"></card-sticker-two>
+      <card-sticker-two
+        :cardId="zoneData.cards[0]"
+        :zone="zoneData"
+      ></card-sticker-two>
     </div>
   </div>
 </template>
@@ -61,7 +64,7 @@ export default {
   right: 0;
   z-index: 2;
   position: absolute;
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.068);
 }
 .Zone {
   position: relative;
@@ -71,6 +74,7 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 0.25rem;
-  border: 2px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.37);
+  background-color: transparent;
 }
 </style>
